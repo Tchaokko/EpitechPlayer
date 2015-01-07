@@ -35,7 +35,7 @@ namespace WidgetImage
             // resume media if it is paused. This has no effect if the media is 
             // already running.
             //myMedia.Play();
-
+            Console.WriteLine("PREV");
             // Initialize the MediaElement property values.
             //InitializePropertyValues();
 
@@ -46,6 +46,7 @@ namespace WidgetImage
             // The Play method will begin the media if it is not currently active or  
             // resume media if it is paused. This has no effect if the media is 
             // already running.
+            Console.WriteLine("PLAY");
             myMedia.Play();
 
             // Initialize the MediaElement property values.
@@ -55,7 +56,7 @@ namespace WidgetImage
 
         void pauseMedia(object sender, MouseButtonEventArgs args)
         {
-
+            Console.WriteLine("PAUSE");
             // The Pause method pauses the media if it is currently running. 
             // The Play method can be used to resume.
             myMedia.Pause();
@@ -69,7 +70,7 @@ namespace WidgetImage
         private void loadFile(object sender, RoutedEventArgs e)
         {
             String pathFile = "";
-            
+
             Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog();
             dlg.FileName = "Document";
            // dlg.Filter = "Image files (*.jpg, *.jpeg, *.jpe, *.jfif, *.png) | *.jpg; *.jpeg; *.jpe; *.jfif; *.png";
@@ -82,6 +83,25 @@ namespace WidgetImage
                 fileName.Text = pathFile;
                 myMedia.Source = new Uri(pathFile);
             }
+        }
+
+        private void buttonPrev_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            Console.WriteLine("prev");
+
+        }
+
+        private void buttonPlay_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            Console.WriteLine("PAUSE");
+
+            myMedia.Play();
+
+        }
+
+        private void buttonNext_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            Console.WriteLine("next");
         }
     }
 }
