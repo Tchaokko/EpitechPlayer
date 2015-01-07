@@ -90,12 +90,15 @@ namespace WidgetImage
 
         private void soundChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
-            myMedia.Volume = (double)volumeSlider.Value;
+            Console.WriteLine((int)volumeSlider.Value);
+
+            myMedia.Volume = (double)volumeSlider.Value / 10;
         }
 
         private void moveVideo(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             int SliderValue = (int)timeline.Value;
+            Console.WriteLine(SliderValue);
             TimeSpan ts = new TimeSpan(0, 0, 0, 0, SliderValue);
             myMedia.Position = ts;
         }
