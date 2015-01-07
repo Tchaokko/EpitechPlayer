@@ -21,8 +21,8 @@
             <Button x:Name="buttonNext" Click="pauseMedia" Content="Pause" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75"/>
 
         </StackPanel>
-        <Slider HorizontalAlignment="Left" Name="volumeSlider" Margin="757,66,0,0" Minimum="0" Maximum="100"  VerticalAlignment="Top" Width="89" ValueChanged="soundChanged"/>
-        <Slider HorizontalAlignment="Left" Name="timeline" Margin="89,319,0,0" VerticalAlignment="Top" Width="654" ValueChanged="moveVideo"/>
+        <Slider HorizontalAlignment="Left" Name="volumeSlider" Margin="757,66,0,0"  Minimum="0" Maximum="100" VerticalAlignment="Top" Width="89" ValueChanged="soundChanged"/>
+        <Slider HorizontalAlignment="Left" Name="timeline" Margin="89,319,0,0" Minimum="0" Maximum="100" VerticalAlignment="Top" Width="654" ValueChanged="moveVideo"/>
 
     </Grid>
 </Window>

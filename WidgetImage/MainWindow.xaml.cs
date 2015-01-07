@@ -48,7 +48,8 @@ namespace WidgetImage
                 pathFile = dlg.FileName;
                 fileName.Text = pathFile;
                 myMedia.Source = new Uri(pathFile);
-                myMedia.Play();    
+                myMedia.Play();
+                InitializePropertyValues();
             }
         }
 
@@ -92,15 +93,23 @@ namespace WidgetImage
         {
             Console.WriteLine((int)volumeSlider.Value);
 
-            myMedia.Volume = (double)volumeSlider.Value / 10;
+            myMedia.Volume = ((double)volumeSlider.Value / 100);
         }
 
         private void moveVideo(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             int SliderValue = (int)timeline.Value;
-            Console.WriteLine(SliderValue);
-            TimeSpan ts = new TimeSpan(0, 0, 0, 0, SliderValue);
-            myMedia.Position = ts;
+            if (myMedia.NaturalDuration.HasTimeSpan)
+            {
+                TimeSpan interm = myMedia.NaturalDuration.TimeSpan;
+                var totalTime = interm.Minutes;
+                var newTime = 0;
+                if (SliderValue > 0)
+                    newTime = (totalTime * SliderValue) / 100;
+                Console.WriteLine(newTime);
+                TimeSpan ts = new TimeSpan(0, 0, newTime, 0, 0);
+                myMedia.Position = ts;
+            }
         }
 
         private void Element_MediaOpened(object sender, EventArgs e)
