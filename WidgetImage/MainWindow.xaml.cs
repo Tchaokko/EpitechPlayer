@@ -48,6 +48,7 @@ namespace WidgetImage
                 pathFile = dlg.FileName;
                 fileName.Text = pathFile;
                 myMedia.Source = new Uri(pathFile);
+                myMedia.Play();    
             }
         }
 
@@ -86,5 +87,31 @@ namespace WidgetImage
         {
 
         }
+
+        private void soundChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            myMedia.Volume = (double)volumeSlider.Value;
+        }
+
+        private void moveVideo(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            int SliderValue = (int)timeline.Value;
+            TimeSpan ts = new TimeSpan(0, 0, 0, 0, SliderValue);
+            myMedia.Position = ts;
+        }
+
+        private void Element_MediaOpened(object sender, EventArgs e)
+        {
+            timeline.Maximum = myMedia.NaturalDuration.TimeSpan.TotalMilliseconds;
+        }
+
+        void InitializePropertyValues()
+        {
+            // Set the media's starting Volume and SpeedRatio to the current value of the
+            // their respective slider controls.
+            myMedia.Volume = (double)volumeSlider.Value;
+           // myMedia.SpeedRatio = (double)speedRatioSlider.Value;
+        }
+        // When the media playback is finished. Stop() the media to seek to media start.
     }
 }
