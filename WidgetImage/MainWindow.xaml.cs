@@ -28,13 +28,51 @@ namespace WidgetImage
             InitializeComponent();
         }
 
+        void prevMedia(object sender, MouseButtonEventArgs args)
+        {
+
+            // The Play method will begin the media if it is not currently active or  
+            // resume media if it is paused. This has no effect if the media is 
+            // already running.
+            //myMedia.Play();
+
+            // Initialize the MediaElement property values.
+            //InitializePropertyValues();
+
+        }
+        void playMedia(object sender, MouseButtonEventArgs args)
+        {
+
+            // The Play method will begin the media if it is not currently active or  
+            // resume media if it is paused. This has no effect if the media is 
+            // already running.
+            myMedia.Play();
+
+            // Initialize the MediaElement property values.
+            //InitializePropertyValues();
+
+        }
+
+        void pauseMedia(object sender, MouseButtonEventArgs args)
+        {
+
+            // The Pause method pauses the media if it is currently running. 
+            // The Play method can be used to resume.
+            myMedia.Pause();
+
+        }
+        private void Element_MediaEnded(object sender, EventArgs e)
+        {
+            myMedia.Stop();
+        }
+
         private void loadFile(object sender, RoutedEventArgs e)
         {
             String pathFile = "";
             
             Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog();
             dlg.FileName = "Document";
-            dlg.Filter = "Image files (*.jpg, *.jpeg, *.jpe, *.jfif, *.png) | *.jpg; *.jpeg; *.jpe; *.jfif; *.png";
+           // dlg.Filter = "Image files (*.jpg, *.jpeg, *.jpe, *.jfif, *.png) | *.jpg; *.jpeg; *.jpe; *.jfif; *.png";
             
             Nullable<bool> result = dlg.ShowDialog();
             
@@ -42,7 +80,7 @@ namespace WidgetImage
             {
                 pathFile = dlg.FileName;
                 fileName.Text = pathFile;
-                myImage.Source = new BitmapImage(new Uri(pathFile));
+                myMedia.Source = new Uri(pathFile);
             }
         }
     }
