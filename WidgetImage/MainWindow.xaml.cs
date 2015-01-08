@@ -39,7 +39,7 @@ namespace WidgetImage
             
             Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog();
             dlg.FileName = "Document";
-           // dlg.Filter = "Image files (*.jpg, *.jpeg, *.jpe, *.jfif, *.png) | *.jpg; *.jpeg; *.jpe; *.jfif; *.png";
+            // dlg.Filter = "Image files (*.jpg, *.jpeg, *.jpe, *.jfif, *.png) | *.jpg; *.jpeg; *.jpe; *.jfif; *.png";
             
             Nullable<bool> result = dlg.ShowDialog();
             
@@ -82,11 +82,6 @@ namespace WidgetImage
 
             // Initialize the MediaElement property values.
             //InitializePropertyValues();
-        }
-
-        private void buttonPrev_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-
         }
 
         private void soundChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
