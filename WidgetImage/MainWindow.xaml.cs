@@ -97,6 +97,7 @@ namespace WidgetImage
                 pathFile = dlg.FileName;
                 fileName.Text = pathFile;
                 myMedia.Source = new Uri(pathFile);
+                myMedia.Play();
             }
         }
     }

@@ -4,7 +4,6 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d" x:Class="WidgetImage.MainWindow"
         Title="MainWindow" Height="350" Width="525">
     <Grid>
-        <Image x:Name="myImage" HorizontalAlignment="Left" Height="145" Margin="343,80,0,0" VerticalAlignment="Top" Width="165"/>
         <Button x:Name="buttonFile" Click="loadFile" Content="Load File" HorizontalAlignment="Left" Margin="372,58,0,0" VerticalAlignment="Top" Width="75" RenderTransformOrigin="-0.383,2.342"/>
         <TextBlock x:Name="fileName" HorizontalAlignment="Left" Margin="180,53,0,0" TextWrapping="Wrap" Text="File Name" VerticalAlignment="Top" Height="20" Width="130" RenderTransformOrigin="0.509,0.49"/>
         <MediaElement x:Name="myMedia" LoadedBehavior="Manual" HorizontalAlignment="Left" Height="166" Margin="0,73,0,0" VerticalAlignment="Top" Width="222"/>
