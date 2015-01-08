@@ -37,6 +37,7 @@ namespace WidgetImage
             InitializeComponent();
             myMedia.Width = 500;
             myMedia.Height = 500;
+            myMedia.Margin = new Thickness(100, 25, 0, 0);
         }
 
         private void Element_MediaEnded(object sender, EventArgs e)
@@ -58,15 +59,29 @@ namespace WidgetImage
                     myMedia.Height = System.Windows.SystemParameters.PrimaryScreenHeight;
                     this.WindowStyle = WindowStyle.None;
                     this.WindowState = WindowState.Maximized;
+                    myMedia.Margin = new Thickness(0, 0, 0, 0);
+                    buttonPrev.Visibility = Visibility.Collapsed;
+                    buttonPlay.Visibility = Visibility.Collapsed;
+                    buttonNext.Visibility = Visibility.Collapsed;
+                    volumeSlider.Visibility = Visibility.Collapsed;
+                    timeline.Visibility = Visibility.Collapsed;
+                    speedRatio.Visibility = Visibility.Collapsed;
+                    mainMenu.Visibility = Visibility.Collapsed;
                 }
                 else
                 {
                     myMedia.Width = 500;
                     myMedia.Height = 500;
-                    //myMedia.Width = System.Windows.SystemParameters.PrimaryScreenWidth;
-                    //myMedia.Height = System.Windows.SystemParameters.PrimaryScreenHeight;
+                    myMedia.Margin = new Thickness(100,25,0,0);
                     this.WindowStyle = WindowStyle.SingleBorderWindow;
                     this.WindowState = WindowState.Normal;
+                    buttonPrev.Visibility = Visibility.Visible;
+                    buttonPlay.Visibility = Visibility.Visible;
+                    buttonNext.Visibility = Visibility.Visible;
+                    volumeSlider.Visibility = Visibility.Visible;
+                    timeline.Visibility = Visibility.Visible;
+                    speedRatio.Visibility = Visibility.Visible;
+                    mainMenu.Visibility = Visibility.Visible;
                 }
 
                 fullscreen = !fullscreen;
