@@ -40,7 +40,7 @@ namespace WidgetImage
             Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog();
             dlg.FileName = "Document";
            // dlg.Filter = "Image files (*.jpg, *.jpeg, *.jpe, *.jfif, *.png) | *.jpg; *.jpeg; *.jpe; *.jfif; *.png";
-
+            
             Nullable<bool> result = dlg.ShowDialog();
             
             if (result == true)
@@ -48,7 +48,9 @@ namespace WidgetImage
                 pathFile = dlg.FileName;
                 fileName.Text = pathFile;
                 myMedia.Source = new Uri(pathFile);
-        }
+                myMedia.Play();
+                InitializePropertyValues();
+            }
         }
 
         private void pauseMedia(object sender, RoutedEventArgs e)
@@ -84,21 +86,44 @@ namespace WidgetImage
 
         private void buttonPrev_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            String pathFile = "";
-            
-            Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog();
-            dlg.FileName = "Document";
-           // dlg.Filter = "Image files (*.jpg, *.jpeg, *.jpe, *.jfif, *.png) | *.jpg; *.jpeg; *.jpe; *.jfif; *.png";
-            
-            Nullable<bool> result = dlg.ShowDialog();
-            
-            if (result == true)
+
+        }
+
+        private void soundChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            Console.WriteLine((int)volumeSlider.Value);
+
+            myMedia.Volume = ((double)volumeSlider.Value / 100);
+        }
+
+        private void moveVideo(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            int SliderValue = (int)timeline.Value;
+            if (myMedia.NaturalDuration.HasTimeSpan)
             {
-                pathFile = dlg.FileName;
-                fileName.Text = pathFile;
-                myMedia.Source = new Uri(pathFile);
-                myMedia.Play();
+                TimeSpan interm = myMedia.NaturalDuration.TimeSpan;
+                var totalTime = interm.Minutes;
+                var newTime = 0;
+                if (SliderValue > 0)
+                    newTime = (totalTime * SliderValue) / 100;
+                Console.WriteLine(newTime);
+                TimeSpan ts = new TimeSpan(0, 0, newTime, 0, 0);
+                myMedia.Position = ts;
             }
         }
+
+        private void Element_MediaOpened(object sender, EventArgs e)
+        {
+            timeline.Maximum = myMedia.NaturalDuration.TimeSpan.TotalMilliseconds;
+        }
+
+        void InitializePropertyValues()
+        {
+            // Set the media's starting Volume and SpeedRatio to the current value of the
+            // their respective slider controls.
+            myMedia.Volume = (double)volumeSlider.Value;
+           // myMedia.SpeedRatio = (double)speedRatioSlider.Value;
+        }
+        // When the media playback is finished. Stop() the media to seek to media start.
     }
 }
