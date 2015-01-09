@@ -29,7 +29,7 @@ namespace WidgetImage
         private static extern uint GetDoubleClickTime();
         private bool fullscreen = false;
         private DispatcherTimer DoubleClickTimer = new DispatcherTimer();
-
+        private DispatcherTimer myDispatcher;
         public MainWindow()
         {
             DoubleClickTimer.Interval = TimeSpan.FromMilliseconds(GetDoubleClickTime());
@@ -88,6 +88,21 @@ namespace WidgetImage
             }
         }
 
+        private void dispatcherTimer_Tick(object sender, EventArgs e)
+        {
+            // Updating the Label which displays the current second
+            if (myMedia.NaturalDuration.HasTimeSpan)
+            {
+                totalTime.Content = myMedia.NaturalDuration.TimeSpan.ToString();
+                string interm = myMedia.Position.ToString();
+                if (interm.Length > 0)
+                    interm = interm.Substring(0, interm.LastIndexOf("."));
+                currentTime.Content = interm;
+            }
+            // Forcing the CommandManager to raise the RequerySuggested event
+            CommandManager.InvalidateRequerySuggested();
+        }
+
         private void loadFile(object sender, RoutedEventArgs e)
         {
             String pathFile = "";
@@ -100,10 +115,15 @@ namespace WidgetImage
             
             if (result == true)
             {
+                myDispatcher = new System.Windows.Threading.DispatcherTimer();
+                myDispatcher.Tick += new EventHandler(dispatcherTimer_Tick);
+                myDispatcher.Interval = new TimeSpan(0, 0, 1);
+                myDispatcher.Start();
                 pathFile = dlg.FileName;
-                fileName.Text = pathFile;
                 myMedia.Source = new Uri(pathFile);
                 myMedia.Play();
+                if (myMedia.NaturalDuration.HasTimeSpan)
+                 totalTime.Content = myMedia.NaturalDuration.TimeSpan.ToString();
                 InitializePropertyValues();
                 //myMedia.Stretch = Stretch.Fill;
             }
@@ -125,7 +145,7 @@ namespace WidgetImage
             // already running.
             Console.WriteLine("Play");
             myMedia.Play();
-
+            totalTime.Content = myMedia.NaturalDuration.ToString();
             // Initialize the MediaElement property values.
             //InitializePropertyValues();
         }
@@ -168,6 +188,7 @@ namespace WidgetImage
                 Console.WriteLine(newTime);
                 TimeSpan ts = new TimeSpan(0, 0, 0, newTime, 0);
                 myMedia.Position = ts;
+                currentTime.Content = ts.ToString();
             }
         }
 
@@ -187,6 +208,17 @@ namespace WidgetImage
             // their respective slider controls.
             myMedia.Volume = (double)volumeSlider.Value;
             myMedia.SpeedRatio = (double)speedRatio.Value;
+            if (myMedia.NaturalDuration.HasTimeSpan)
+                totalTime.Content = myMedia.NaturalDuration.TimeSpan.ToString();
+        }
+
+        private void Window_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            var newX = (myWindow.ActualHeight * 10) / 100;
+            var newY = (myWindow.ActualHeight * 5) / 100;
+            myMedia.Margin = new Thickness(newX, newY, 0, 0);
+            myMedia.Height = (myWindow.ActualHeight * 80) / 100;
+            myMedia.Width = (myWindow.ActualWidth * 90) / 100;
         }
         // When the media playback is finished. Stop() the media to seek to media start.
     }
