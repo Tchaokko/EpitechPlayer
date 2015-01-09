@@ -106,7 +106,6 @@ namespace WidgetImage
         private void loadFile(object sender, RoutedEventArgs e)
         {
             String pathFile = "";
-            
             Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog();
             dlg.FileName = "Document";
             // dlg.Filter = "Image files (*.jpg, *.jpeg, *.jpe, *.jfif, *.png) | *.jpg; *.jpeg; *.jpe; *.jfif; *.png";
@@ -205,7 +204,7 @@ namespace WidgetImage
             myMedia.SpeedRatio = (double)speedRatio.Value;
             if (myMedia.NaturalDuration.HasTimeSpan)
                 totalTime.Content = myMedia.NaturalDuration.TimeSpan.ToString();
-        }
+            }
 
         private void Window_SizeChanged(object sender, SizeChangedEventArgs e)
         {
