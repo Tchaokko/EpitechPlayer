@@ -30,8 +30,7 @@ namespace WidgetImage
 
         private void loadFile(object sender, RoutedEventArgs e)
         {
-            String pathFile = "";
-            
+            String pathFile = "";            
             Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog();
             dlg.FileName = "Document";
             dlg.Filter = "Image files (*.jpg, *.jpeg, *.jpe, *.jfif, *.png) | *.jpg; *.jpeg; *.jpe; *.jfif; *.png";
@@ -41,6 +40,7 @@ namespace WidgetImage
             if (result == true)
             {
                 pathFile = dlg.FileName;
+                System.Console.WriteLine("this =" + pathFile);
                 fileName.Text = pathFile;
                 myImage.Source = new BitmapImage(new Uri(pathFile));
             }
