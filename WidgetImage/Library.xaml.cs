@@ -82,5 +82,10 @@ namespace WidgetImage
             this.Close();
 
         }
+
+        private void Window_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            mainMenu.Width = this.Width;
+        }
     }
 }

@@ -27,7 +27,7 @@
         <Slider HorizontalAlignment="Left" x:Name="speedRatio" Margin="125,340,0,0" Value="1" Minimum="0" Maximum="5" VerticalAlignment="Top" Width="84" ValueChanged="speedRatioFunc"/>
         
         <Label Name="currentTime" Content="0:0:0" HorizontalAlignment="Left" Margin="31,317,0,0" VerticalAlignment="Top"/>
-        <Menu Name="mainMenu" IsMainMenu="true" HorizontalAlignment="Left" Height="20" VerticalAlignment="Top" Width="140">
+        <Menu Name="mainMenu" IsMainMenu="true" HorizontalAlignment="Left" Height="20" VerticalAlignment="Top" Width="858" Margin="0,0,-0.4,0">
             <MenuItem Header="_View">
                 <MenuItem Header="Menu" Click="loadMenu"/>
                 <MenuItem Header="Library" Click="loadLibrary" />

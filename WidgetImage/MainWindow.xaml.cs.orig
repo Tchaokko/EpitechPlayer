@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Runtime.InteropServices;
 //using System.Collections.Specialized;
 using System.Linq;
 using System.Text;
@@ -14,6 +15,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
+using System.Windows.Threading;
 using System.Windows.Shapes;
 
 namespace WidgetImage
@@ -23,82 +25,98 @@ namespace WidgetImage
     /// </summary>
     public partial class MainWindow : Window
     {
+
         public MainWindow()
         {
             InitializeComponent();
         }
 
-        private void Element_MediaEnded(object sender, EventArgs e)
+        private void loadMediaPlayer(object sender, System.Windows.RoutedEventArgs e)
         {
-            myMedia.Stop();
-        }
+            HandleMediaElement newWindow = new HandleMediaElement();
 
+<<<<<<< HEAD
         private void loadFile(object sender, RoutedEventArgs e)
         {
             String pathFile = "";
-            
             Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog();
             dlg.FileName = "Document";
-           // dlg.Filter = "Image files (*.jpg, *.jpeg, *.jpe, *.jfif, *.png) | *.jpg; *.jpeg; *.jpe; *.jfif; *.png";
-
-            Nullable<bool> result = dlg.ShowDialog();
+            // dlg.Filter = "Image files (*.jpg, *.jpeg, *.jpe, *.jfif, *.png) | *.jpg; *.jpeg; *.jpe; *.jfif; *.png";
+=======
+            newWindow.Show();
+            this.Close();
+>>>>>>> 4656fc9b7522210a95c285b61eda7c134eaa05df
             
-            if (result == true)
-            {
-                pathFile = dlg.FileName;
-                fileName.Text = pathFile;
-                myMedia.Source = new Uri(pathFile);
-        }
         }
 
-        private void pauseMedia(object sender, RoutedEventArgs e)
+        private void loadLibrary(object sender, System.Windows.RoutedEventArgs e)
         {
-            // The Pause method pauses the media if it is currently running. 
-            // The Play method can be used to resume.
-            Console.WriteLine("Pause");
-            myMedia.Pause();
-        }
+            Library newWindow = new Library();
 
-        private void playMedia(object sender, RoutedEventArgs e)
-        {
-            // The Play method will begin the media if it is not currently active or  
-            // resume media if it is paused. This has no effect if the media is 
-            // already running.
-            Console.WriteLine("Play");
-            myMedia.Play();
+            newWindow.Show();
+            this.Close();
 
+<<<<<<< HEAD
             // Initialize the MediaElement property values.
             //InitializePropertyValues();
         }
 
-        private void prevMedia(object sender, RoutedEventArgs e)
+        private void soundChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
-            // The Play method will begin the media if it is not currently active or  
-            // resume media if it is paused. This has no effect if the media is 
-            // already running.
-            //myMedia.Play();
+            Console.WriteLine((int)volumeSlider.Value);
 
-            // Initialize the MediaElement property values.
-            //InitializePropertyValues();
+            myMedia.Volume = ((double)volumeSlider.Value / 100);
         }
 
-        private void buttonPrev_MouseDown(object sender, MouseButtonEventArgs e)
+ 
+        private void moveVideo(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
-            String pathFile = "";
-            
-            Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog();
-            dlg.FileName = "Document";
-           // dlg.Filter = "Image files (*.jpg, *.jpeg, *.jpe, *.jfif, *.png) | *.jpg; *.jpeg; *.jpe; *.jfif; *.png";
-            
-            Nullable<bool> result = dlg.ShowDialog();
-            
-            if (result == true)
+            int SliderValue = (int)timeline.Value;
+            if (myMedia.NaturalDuration.HasTimeSpan)
             {
-                pathFile = dlg.FileName;
-                fileName.Text = pathFile;
-                myMedia.Source = new Uri(pathFile);
-                myMedia.Play();
+                TimeSpan interm = myMedia.NaturalDuration.TimeSpan;
+                var totalTime = interm.TotalSeconds;
+                Console.WriteLine(interm.TotalSeconds);
+                var newTime = 0;
+                if (SliderValue > 0)
+                    newTime = ((int)totalTime * SliderValue) / 100;
+                Console.WriteLine(newTime);
+                TimeSpan ts = new TimeSpan(0, 0, 0, newTime, 0);
+                myMedia.Position = ts;
+                currentTime.Content = ts.ToString();
             }
         }
+
+         private void speedRatioFunc(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            myMedia.SpeedRatio = (double)speedRatio.Value;
+        }
+
+        private void Element_MediaOpened(object sender, EventArgs e)
+        {
+            timeline.Maximum = myMedia.NaturalDuration.TimeSpan.TotalMilliseconds;
+        }
+
+        void InitializePropertyValues()
+        {
+            // Set the media's starting Volume and SpeedRatio to the current value of the
+            // their respective slider controls.
+            myMedia.Volume = (double)volumeSlider.Value;
+            myMedia.SpeedRatio = (double)speedRatio.Value;
+            if (myMedia.NaturalDuration.HasTimeSpan)
+                totalTime.Content = myMedia.NaturalDuration.TimeSpan.ToString();
+            }
+
+        private void Window_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            var newX = (myWindow.ActualHeight * 10) / 100;
+            var newY = (myWindow.ActualHeight * 5) / 100;
+            myMedia.Margin = new Thickness(newX, newY, 0, 0);
+            myMedia.Height = (myWindow.ActualHeight * 80) / 100;
+            myMedia.Width = (myWindow.ActualWidth * 90) / 100;
+=======
+>>>>>>> 4656fc9b7522210a95c285b61eda7c134eaa05df
+        }
     }
+
 }
