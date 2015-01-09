@@ -27,6 +27,7 @@ namespace WidgetImage
         private bool fullscreen = false;
         private DispatcherTimer DoubleClickTimer = new DispatcherTimer();
         private DispatcherTimer myDispatcher;
+        private bool dragStarted = false;
 
         public HandleMediaElement()
         {
@@ -93,8 +94,9 @@ namespace WidgetImage
             {
                 totalTime.Content = myMedia.NaturalDuration.TimeSpan.ToString();
                 string interm = myMedia.Position.ToString();
+                Console.WriteLine(interm.Length);
                 if (interm.Length > 0)
-                    interm = interm.Substring(0, interm.LastIndexOf(".")); //here need expetion
+                   interm = interm.Substring(0, interm.LastIndexOf(".")); //here need expetion
                 currentTime.Content = interm;
             }
             // Forcing the CommandManager to raise the RequerySuggested event
@@ -132,7 +134,6 @@ namespace WidgetImage
         {
             // The Pause method pauses the media if it is currently running. 
             // The Play method can be used to resume.
-            Console.WriteLine("Pause");
             myMedia.Pause();
         }
 
@@ -141,7 +142,6 @@ namespace WidgetImage
             // The Play method will begin the media if it is not currently active or  
             // resume media if it is paused. This has no effect if the media is 
             // already running.
-            Console.WriteLine("Play");
             myMedia.Play();
             totalTime.Content = myMedia.NaturalDuration.ToString();
             // Initialize the MediaElement property values.
@@ -175,18 +175,19 @@ namespace WidgetImage
         private void moveVideo(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             int SliderValue = (int)timeline.Value;
-            if (myMedia.NaturalDuration.HasTimeSpan)
+            if (!dragStarted)
             {
-                TimeSpan interm = myMedia.NaturalDuration.TimeSpan;
-                var totalTime = interm.TotalSeconds;
-                Console.WriteLine(interm.TotalSeconds);
-                var newTime = 0;
-                if (SliderValue > 0)
-                    newTime = ((int)totalTime * SliderValue) / 100;
-                Console.WriteLine(newTime);
-                TimeSpan ts = new TimeSpan(0, 0, 0, newTime, 0);
-                myMedia.Position = ts;
-                currentTime.Content = ts.ToString();
+                if (myMedia.NaturalDuration.HasTimeSpan)
+                {
+                    TimeSpan interm = myMedia.NaturalDuration.TimeSpan;
+                    var totalTime = interm.TotalSeconds;
+                    var newTime = 0;
+                    if (SliderValue > 0)
+                        newTime = ((int)totalTime * SliderValue) / 100;
+                    TimeSpan ts = new TimeSpan(0, 0, 0, newTime, 0);
+                    myMedia.Position = ts;
+                    currentTime.Content = ts.ToString();
+                }
             }
         }
 
@@ -233,6 +234,30 @@ namespace WidgetImage
 
             newWindow.Show();
             this.Close();
+        }
+
+
+        private void timeline_DragCompleted(object sender, System.Windows.Controls.Primitives.DragCompletedEventArgs e)
+        {
+            int SliderValue = (int)timeline.Value;
+            Console.WriteLine("check");
+            if (myMedia.NaturalDuration.HasTimeSpan)
+            {
+                TimeSpan interm = myMedia.NaturalDuration.TimeSpan;
+                var totalTime = interm.TotalSeconds;
+                var newTime = 0;
+                if (SliderValue > 0)
+                    newTime = ((int)totalTime * SliderValue) / 100;
+                TimeSpan ts = new TimeSpan(0, 0, 0, newTime, 0);
+                myMedia.Position = ts;
+                currentTime.Content = ts.ToString();
+            }
+            dragStarted = false;
+        }
+
+        private void timeline_DragStarted(object sender, System.Windows.Controls.Primitives.DragStartedEventArgs e)
+        {
+            dragStarted = true;
         }
     }
 }
