@@ -11,7 +11,9 @@
                 <DropShadowEffect/>
             </Button.Effect>
         </Button>
-        <TreeView x:Name="myTree" HorizontalAlignment="Left" Height="607" Margin="33,75,0,0" VerticalAlignment="Top" Width="258" Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" MouseDoubleClick="MouseDoubleClickMyTree"/>
+        <TreeView x:Name="myTree" HorizontalAlignment="Left" Height="607" Margin="33,75,0,0" VerticalAlignment="Top" Width="258" Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" MouseDoubleClick="MouseDoubleClickMyTree">
+            <MediaElement Height="100" Margin="0,88,0,-172" VerticalAlignment="Top" Width="100"/>
+        </TreeView>
         <Button Click="Button_Musics" x:Name="butt2" Content="Musics" HorizontalAlignment="Left" Margin="113,36,0,0" VerticalAlignment="Top" Width="75" FontWeight="Bold" >
             <Button.Background>
                 <ImageBrush/>
@@ -28,17 +30,17 @@
                 <DropShadowEffect/>
             </Button.Effect>
         </Button>
-        <Frame x:Name="myFrame" Content="" HorizontalAlignment="Left" Height="606" Margin="318,75,0,0" VerticalAlignment="Top" Width="657" Foreground="Black" Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" />
+        <Frame x:Name="myFrame" Content="" HorizontalAlignment="Left" Height="606" Margin="320,75,0,0" VerticalAlignment="Top" Width="655" Foreground="Black" Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" />
 
         <Menu Name="mainMenu" IsMainMenu="true" HorizontalAlignment="Left" Height="20" VerticalAlignment="Top" Width="140">
-            <MenuItem Header="_First">
+            <MenuItem Header="_View">
                 <MenuItem Header="Menu" Click="loadMenu" />
-                <MenuItem Header="Media Player" Click="loadMediaPlayer"/>                
+                <MenuItem Header="Media Player" Click="loadMediaPlayer"/>
             </MenuItem>
             <MenuItem Header="_Second">
             </MenuItem>
             <MenuItem Header="_Third"/>
         </Menu>
-        
+
     </Grid>
 </Window>

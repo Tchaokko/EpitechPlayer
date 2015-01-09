@@ -36,8 +36,7 @@ namespace WidgetImage
             HandleMediaElement newWindow = new HandleMediaElement();
 
             newWindow.Show();
-            this.Close();
-            
+            this.Close();            
         }
 
         private void loadLibrary(object sender, System.Windows.RoutedEventArgs e)
@@ -46,7 +45,6 @@ namespace WidgetImage
 
             newWindow.Show();
             this.Close();
-
         }
     }
 
