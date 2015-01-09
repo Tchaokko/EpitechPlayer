@@ -95,8 +95,15 @@ namespace WidgetImage
                 totalTime.Content = myMedia.NaturalDuration.TimeSpan.ToString();
                 string interm = myMedia.Position.ToString();
                 Console.WriteLine(interm.Length);
-                if (interm.Length > 0)
-                   interm = interm.Substring(0, interm.LastIndexOf(".")); //here need expetion
+                try
+                {
+                    interm = interm.Substring(0, interm.LastIndexOf(".")); //here need expetion
+                }
+                catch 
+                {
+                    Console.WriteLine("error = ", interm);
+                    return; 
+                }
                 currentTime.Content = interm;
             }
             // Forcing the CommandManager to raise the RequerySuggested event
