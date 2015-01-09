@@ -21,7 +21,6 @@ namespace WidgetImage
         public Library()
         {
             InitializeComponent();
-
         }
 
         private void Button_Musics(object sender, RoutedEventArgs e)
@@ -32,7 +31,15 @@ namespace WidgetImage
             DirectoryInfo info = new DirectoryInfo(path);
             if (info.Exists)
             {
-                myTree.ItemsSource = info.GetFiles();
+                List<Label> list = new List<Label>();
+                foreach (string str in Directory.GetFiles(path))
+                {
+                    Label tmp = new Label();
+                    tmp.Content = str;
+                    list.Add(tmp);
+                }
+                myTree.ItemsSource = list;
+
             }
         }
 
@@ -44,7 +51,32 @@ namespace WidgetImage
             DirectoryInfo info = new DirectoryInfo(path);
             if (info.Exists)
             {
-                myTree.ItemsSource = info.GetFiles();
+                List<MediaElement> list = new List<MediaElement>();
+                foreach (string str in Directory.GetFiles(path))
+                {
+                    MediaElement tmp = new MediaElement();
+                    tmp.Source = new Uri(str);
+                    tmp.LoadedBehavior = MediaState.Manual;
+
+                    if (tmp.NaturalDuration.HasTimeSpan)
+                    {
+                        TimeSpan interm = tmp.NaturalDuration.TimeSpan;
+                        if (interm.TotalSeconds > 5)
+                        {
+                            var newTime = ((int)interm.TotalSeconds * 5) / 100;
+                            TimeSpan ts = new TimeSpan(0, 0, 0, newTime, 0);
+                            tmp.Position = ts;
+                        }
+                    }
+                    tmp.Height = 100;
+                    tmp.Width = 100;
+                    tmp.Pause();  
+                    //tmp.Content = str;
+                    list.Add(tmp);
+                 }
+                
+                myTree.ItemsSource = list;
+
             }
         }
 
@@ -56,7 +88,18 @@ namespace WidgetImage
             DirectoryInfo info = new DirectoryInfo(path);
             if (info.Exists)
             {
-                myTree.ItemsSource = info.GetFiles();
+                List<MediaElement> list = new List<MediaElement>();
+                foreach (string str in Directory.GetFiles(path))
+                {
+                    MediaElement tmp = new MediaElement();
+                    tmp.Source = new Uri(str);
+                    if (tmp.Height > 100)
+                        tmp.Height = 100;
+                    if (tmp.Width > 100)
+                        tmp.Width = 100;
+                    list.Add(tmp);
+                }
+                myTree.ItemsSource = list;
             }
         }
 
