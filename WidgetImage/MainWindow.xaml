@@ -5,14 +5,9 @@
         Title="MainWindow" Height="404" Width="864">
     <Grid>
 
-        <Menu Name="mainMenu" IsMainMenu="true" HorizontalAlignment="Left" Height="20" VerticalAlignment="Top" Width="140">
-            <MenuItem Header="_First">
-                <MenuItem Header="Media Player" Click="loadMediaPlayer"/>
-                <MenuItem Header="Library" Click="loadLibrary" />
-            </MenuItem>
-            <MenuItem Header="_Second">                
-            </MenuItem>
-            <MenuItem Header="_Third"/>
+        <Menu Name="mainMenu" IsMainMenu="true" HorizontalAlignment="Left" Height="20" VerticalAlignment="Top" Width="135">
+            <MenuItem Header="MediaPlayer" Click="loadMediaPlayer"/>
+            <MenuItem Header="Library" Click="loadLibrary" />                        
         </Menu>
 
     </Grid>

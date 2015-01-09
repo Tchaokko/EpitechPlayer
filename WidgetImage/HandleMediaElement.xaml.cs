@@ -28,8 +28,10 @@ namespace WidgetImage
         private DispatcherTimer DoubleClickTimer = new DispatcherTimer();
         private DispatcherTimer myDispatcher;
         private bool dragStarted = false;
+        private MainWindow _window;
+        public Library    _library {set; get;}
 
-        public HandleMediaElement()
+        public HandleMediaElement(MainWindow window)
         {
             DoubleClickTimer.Interval = TimeSpan.FromMilliseconds(GetDoubleClickTime());
             DoubleClickTimer.Tick += (s, e) => DoubleClickTimer.Stop();
@@ -37,6 +39,7 @@ namespace WidgetImage
             myMedia.Width = 500;
             myMedia.Height = 500;
             myMedia.Margin = new Thickness(100, 25, 0, 0);
+            _window = window;            
         }
 
         private void Element_MediaEnded(object sender, EventArgs e)
@@ -228,21 +231,19 @@ namespace WidgetImage
         }
         // When the media playback is finished. Stop() the media to seek to media start.
 
+        
         private void loadMenu(object sender, System.Windows.RoutedEventArgs e)
         {
-            MainWindow newWindow = new MainWindow();
+            _window.Show();
+            this.Hide();
 
-            newWindow.Show();
-            this.Close();
         }
+
         private void loadLibrary(object sender, System.Windows.RoutedEventArgs e)
         {
-            Library newWindow = new Library();
-
-            newWindow.Show();
-            this.Close();
-        }
-
+            _library.Show();
+            this.Hide();
+        }     
 
         private void timeline_DragCompleted(object sender, System.Windows.Controls.Primitives.DragCompletedEventArgs e)
         {

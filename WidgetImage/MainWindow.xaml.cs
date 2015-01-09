@@ -25,26 +25,29 @@ namespace WidgetImage
     /// </summary>
     public partial class MainWindow : Window
     {
+        HandleMediaElement _mediaPlayer;
+        Library            _library;
+
 
         public MainWindow()
         {
             InitializeComponent();
+            _mediaPlayer = new HandleMediaElement(this);
+            _library = new Library(this);
+            _mediaPlayer._library = _library;
+            _library._mediaPlayer = _mediaPlayer;
         }
 
         private void loadMediaPlayer(object sender, System.Windows.RoutedEventArgs e)
-        {
-            HandleMediaElement newWindow = new HandleMediaElement();
-
-            newWindow.Show();
-            this.Close();            
+        {         
+            _mediaPlayer.Show();
+            this.Hide();            
         }
 
         private void loadLibrary(object sender, System.Windows.RoutedEventArgs e)
-        {
-            Library newWindow = new Library();
-
-            newWindow.Show();
-            this.Close();
+        {        
+            _library.Show();
+            this.Hide();
         }
     }
 
