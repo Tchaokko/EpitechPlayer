@@ -85,14 +85,16 @@ namespace WidgetImage
             _listButton.Add(btn);
             ListPlaylist.ItemsSource = _listButton;
             ListPlaylist.Items.Refresh();
-            _playlist.Add(new Playlist(_playlist.Count() + 1));     
+            _playlist.Add(new Playlist(_playlist.Count() + 1));            
+            ListPlaylist.Height += 22;
         }
 
         private void removePlaylist(object sender, System.Windows.RoutedEventArgs e)
         {
             if (_playlist.Count() <= 0)
                 return;           
-            try {
+            try {                
+                ListPlaylist.Height -= 22;
                 _playlist.RemoveAt(_playlist.Count - 1);
                 _listButton.RemoveAt(_listButton.Count - 1);
                 ListPlaylist.Items.RemoveAt(ListPlaylist.AlternationCount - 1);                
