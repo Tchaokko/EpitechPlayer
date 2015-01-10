@@ -30,17 +30,16 @@ namespace WidgetImage
         private bool dragStarted = false;
         private MainWindow _window;
         public Library    _library {set; get;}
-        public List<Playlist> _playlist { get; set; }
+        public List<Playlist>     _playlist { set; get; }
+
 
         public HandleMediaElement(MainWindow window)
         {
             DoubleClickTimer.Interval = TimeSpan.FromMilliseconds(GetDoubleClickTime());
             DoubleClickTimer.Tick += (s, e) => DoubleClickTimer.Stop();
             InitializeComponent();
-            myMedia.Width = 500;
-            myMedia.Height = 500;
-            myMedia.Margin = new Thickness(100, 25, 0, 0);
-            _window = window;            
+            timeline.Width = (gridControl.ActualWidth * 75) / 100;
+            _window = window;
         }
 
         private void Element_MediaEnded(object sender, EventArgs e)
@@ -58,11 +57,15 @@ namespace WidgetImage
             {
                 if (!fullscreen)
                 {
-                    myMedia.Width = System.Windows.SystemParameters.PrimaryScreenWidth;
-                    myMedia.Height = System.Windows.SystemParameters.PrimaryScreenHeight;
+                    
                     this.WindowStyle = WindowStyle.None;
                     this.WindowState = WindowState.Maximized;
+                    gridMedia.Margin = new Thickness(0, 0, 0, 0);
+                    gridMedia.Height = System.Windows.SystemParameters.PrimaryScreenWidth;
+                    gridMedia.Height = System.Windows.SystemParameters.PrimaryScreenHeight;
                     myMedia.Margin = new Thickness(0, 0, 0, 0);
+                    myMedia.Width = System.Windows.SystemParameters.PrimaryScreenWidth;
+                    myMedia.Height = System.Windows.SystemParameters.PrimaryScreenHeight;
                     buttonPrev.Visibility = Visibility.Collapsed;
                     buttonPlay.Visibility = Visibility.Collapsed;
                     buttonNext.Visibility = Visibility.Collapsed;
@@ -70,12 +73,12 @@ namespace WidgetImage
                     timeline.Visibility = Visibility.Collapsed;
                     speedRatio.Visibility = Visibility.Collapsed;
                     mainMenu.Visibility = Visibility.Collapsed;
+                    gridControl.Visibility = Visibility.Collapsed;
                 }
                 else
                 {
-                    myMedia.Width = 500;
-                    myMedia.Height = 500;
-                    myMedia.Margin = new Thickness(100, 25, 0, 0);
+                    var newY = (myWindow.ActualHeight * 10) / 100;
+                    gridMedia.Margin = new Thickness(0, newY, 0, 0);
                     this.WindowStyle = WindowStyle.SingleBorderWindow;
                     this.WindowState = WindowState.Normal;
                     buttonPrev.Visibility = Visibility.Visible;
@@ -85,6 +88,15 @@ namespace WidgetImage
                     timeline.Visibility = Visibility.Visible;
                     speedRatio.Visibility = Visibility.Visible;
                     mainMenu.Visibility = Visibility.Visible;
+                    gridControl.Visibility = Visibility.Visible;
+                    newY = (myWindow.ActualHeight * 10) / 100;
+                    gridMedia.Margin = new Thickness(0, newY, 0, 0);
+                    gridMedia.Height = (myWindow.ActualHeight * 60) / 100;
+                    gridMedia.Width = myWindow.ActualWidth;
+                    var newX = (gridMedia.ActualWidth * 5) / 100;
+                    myMedia.Margin = new Thickness(newX, 0, 0, 0);
+                    myMedia.Height = gridMedia.ActualHeight;
+                    myMedia.Width = (gridMedia.ActualWidth * 90) / 100;
                 }
 
                 fullscreen = !fullscreen;
@@ -136,16 +148,23 @@ namespace WidgetImage
                 if (myMedia.NaturalDuration.HasTimeSpan)
                     totalTime.Content = myMedia.NaturalDuration.TimeSpan.ToString();
                 InitializePropertyValues();
+                var newX = (gridMedia.ActualWidth * 5) / 100;
+                myMedia.Margin = new Thickness(newX, 0, 0, 0);
+                myMedia.Height = gridMedia.ActualHeight;
+                myMedia.Width = (gridMedia.ActualWidth * 90) / 100;
                 //myMedia.Stretch = Stretch.Fill;
             }
         }
-
 
         private void pauseMedia(object sender, RoutedEventArgs e)
         {
             // The Pause method pauses the media if it is currently running. 
             // The Play method can be used to resume.
-            myMedia.Pause();
+            try
+            {
+                myMedia.Pause();
+            }
+            catch { return; }
         }
 
         private void playMedia(object sender, RoutedEventArgs e)
@@ -178,8 +197,9 @@ namespace WidgetImage
         private void soundChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             Console.WriteLine((int)volumeSlider.Value);
-
-            myMedia.Volume = ((double)volumeSlider.Value / 100);
+            try { myMedia.Volume = ((double)volumeSlider.Value / 100); }
+            catch { return; }
+            
         }
 
 
@@ -204,7 +224,8 @@ namespace WidgetImage
 
         private void speedRatioFunc(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
-            myMedia.SpeedRatio = (double)speedRatio.Value;
+            try { myMedia.SpeedRatio = (double)speedRatio.Value; }
+            catch { return; }
         }
 
         private void Element_MediaOpened(object sender, EventArgs e)
@@ -224,11 +245,28 @@ namespace WidgetImage
 
         private void Window_SizeChanged(object sender, SizeChangedEventArgs e)
         {
-            var newX = (myWindow.ActualHeight * 10) / 100;
-            var newY = (myWindow.ActualHeight * 5) / 100;
+            var newX = (myWindow.ActualWidth * 5) / 100;
+            var newY = (myWindow.ActualHeight * 10) / 100;
             myMedia.Margin = new Thickness(newX, newY, 0, 0);
             myMedia.Height = (myWindow.ActualHeight * 80) / 100;
             myMedia.Width = (myWindow.ActualWidth * 90) / 100;
+            newX = 0;
+            newY = myWindow.ActualHeight - 100;
+            gridControl.Margin = new Thickness(newX, newY, 0, 0);
+            gridControl.Height = 60;
+            gridControl.Width = myWindow.ActualWidth;
+            newX = 0;
+            newY = (myWindow.ActualHeight * 10) / 100;
+            gridMedia.Margin = new Thickness(newX, newY, 0, 0);
+            gridMedia.Height = (myWindow.ActualHeight * 60) / 100;
+            gridMedia.Width = myWindow.ActualWidth;
+            newX = (gridMedia.ActualWidth * 5) / 100;
+            myMedia.Margin = new Thickness(newX, 0, 0, 0);
+            myMedia.Height = gridMedia.ActualHeight;
+            myMedia.Width = (gridMedia.ActualWidth * 90) / 100;
+            timeline.Width = (gridControl.ActualWidth * 75) / 100;
+            volumeSlider.Width = (gridControl.ActualWidth * 10) / 100;
+
         }
         // When the media playback is finished. Stop() the media to seek to media start.
 
