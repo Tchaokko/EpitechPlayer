@@ -2,8 +2,8 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="Library" Height="720" Width="1024" SizeChanged="Window_SizeChanged">
-    <Grid Margin="0,1,-0.4,-1">
-        <Button Click="Button_Videos" x:Name="butt" Content="Videos" HorizontalAlignment="Left" Margin="33,36,0,0" VerticalAlignment="Top" Width="75" FontWeight="Bold" >
+    <Grid>
+        <Button Click="Button_Videos" x:Name="butt" Content="Videos" HorizontalAlignment="Left" Margin="33,37,0,0" VerticalAlignment="Top" Width="75" FontWeight="Bold" >
             <Button.Background>
                 <ImageBrush/>
             </Button.Background>
@@ -11,7 +11,13 @@
                 <DropShadowEffect/>
             </Button.Effect>
         </Button>
-
+<<<<<<< HEAD
+        <TreeView x:Name="myTree" HorizontalAlignment="Left" Height="607" Margin="33,75,0,0" VerticalAlignment="Top" Width="706" Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" MouseDoubleClick="MouseDoubleClickMyTree"/>
+=======
+        <TreeView x:Name="myTree" HorizontalAlignment="Left" Height="607" Margin="33,75,0,0" VerticalAlignment="Top" Width="258" Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" MouseDoubleClick="MouseDoubleClickMyTree">
+            <MediaElement Height="100" Margin="0,88,0,-172" VerticalAlignment="Top" Width="100"/>
+        </TreeView>
+>>>>>>> 728728f8b9ff3319900ac36b1e339b6c1b5cd7cc
         <Button Click="Button_Musics" x:Name="butt2" Content="Musics" HorizontalAlignment="Left" Margin="113,36,0,0" VerticalAlignment="Top" Width="75" FontWeight="Bold" >
             <Button.Background>
                 <ImageBrush/>
@@ -28,9 +34,16 @@
                 <DropShadowEffect/>
             </Button.Effect>
         </Button>
+<<<<<<< HEAD
 
         <Menu Name="mainMenu" IsMainMenu="true" HorizontalAlignment="Left" Height="20" VerticalAlignment="Top" Width="1018" Margin="0,0,-0.4,0">
             <MenuItem Header="_First">
+=======
+        <Frame x:Name="myFrame" Content="" HorizontalAlignment="Left" Height="606" Margin="320,75,0,0" VerticalAlignment="Top" Width="655" Foreground="Black" Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" />
+
+        <Menu Name="mainMenu" IsMainMenu="true" HorizontalAlignment="Left" Height="20" VerticalAlignment="Top" Width="140">
+            <MenuItem Header="_View">
+>>>>>>> 728728f8b9ff3319900ac36b1e339b6c1b5cd7cc
                 <MenuItem Header="Menu" Click="loadMenu" />
                 <MenuItem Header="Media Player" Click="loadMediaPlayer"/>
             </MenuItem>
@@ -38,21 +51,6 @@
             </MenuItem>
             <MenuItem Header="_Third"/>
         </Menu>
-
-        <ListBox x:Name="myListBox" HorizontalAlignment="Left" Height="552" Margin="33,92,0,0" VerticalAlignment="Top" Width="731" Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}">
-            <ListBox.ItemTemplate>
-                <DataTemplate>
-                    <Grid>
-                        <StackPanel Orientation="Horizontal">
-                            <Label Content="{Binding myPath}"/>
-                            <Label Content="{Binding Data1}" Margin="10,0,0,0"/>
-                        </StackPanel>
-                    </Grid>
-                </DataTemplate>
-            </ListBox.ItemTemplate>
-        </ListBox>
-        <Label Content="Aperçus" HorizontalAlignment="Left" Margin="841,36,0,0" VerticalAlignment="Top" />
-        <MediaElement x:Name="mediaAperçus" HorizontalAlignment="Left" Height="159" Margin="799,67,0,0" VerticalAlignment="Top" Width="173" LoadedBehavior="Manual" RenderTransformOrigin="-0.034,-0.218"/>
 
     </Grid>
 </Window>
