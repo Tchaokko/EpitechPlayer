@@ -3,27 +3,18 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="Library" Height="720" Width="1024" SizeChanged="Window_SizeChanged">
     <Grid x:Name="appBackground" Background="#FF696969">
-        <Button Click="Button_Videos" x:Name="butt" Content="Videos" HorizontalAlignment="Left" Margin="33,36,0,0" VerticalAlignment="Top" Width="75" FontWeight="Bold" >
-            <Button.Background>
-                <ImageBrush/>
-            </Button.Background>
+        <Button Click="Button_Videos" x:Name="butt" Content="Videos" HorizontalAlignment="Left" Margin="33,36,0,0" VerticalAlignment="Top" Width="75" FontWeight="Bold" Background="#FFE2E2E2" >
             <Button.Effect>
                 <DropShadowEffect/>
             </Button.Effect>
         </Button>
 
-        <Button Click="Button_Musics" x:Name="butt2" Content="Musics" HorizontalAlignment="Left" Margin="113,36,0,0" VerticalAlignment="Top" Width="75" FontWeight="Bold" >
-            <Button.Background>
-                <ImageBrush/>
-            </Button.Background>
+        <Button Click="Button_Musics" x:Name="butt2" Content="Musics" HorizontalAlignment="Left" Margin="113,36,0,0" VerticalAlignment="Top" Width="75" FontWeight="Bold" Background="#FFE2E2E2" >
             <Button.Effect>
                 <DropShadowEffect/>
             </Button.Effect>
         </Button>
-        <Button Click="Button_Image" x:Name="butt3" Content="Images" HorizontalAlignment="Left" Margin="193,36,0,0" VerticalAlignment="Top" Width="75" FontWeight="Bold" >
-            <Button.Background>
-                <ImageBrush/>
-            </Button.Background>
+        <Button Click="Button_Image" x:Name="butt3" Content="Images" HorizontalAlignment="Left" Margin="193,36,0,0" VerticalAlignment="Top" Width="75" FontWeight="Bold" Background="#FFE2E2E2" >
             <Button.Effect>
                 <DropShadowEffect/>
             </Button.Effect>
@@ -31,7 +22,7 @@
 
         <Menu Name="mainMenu" IsMainMenu="true" HorizontalAlignment="Left" Height="20" VerticalAlignment="Top" Width="132">
             <MenuItem Header="Menu" Click="loadMenu"/>
-                <MenuItem Header="Media Player" Click="loadMediaPlayer"/>
+            <MenuItem Header="Media Player" Click="loadMediaPlayer"/>
         </Menu>
 
         <ListBox x:Name="myListBox" HorizontalAlignment="Left" Height="552" Margin="33,92,0,0" VerticalAlignment="Top" Width="731" Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}">

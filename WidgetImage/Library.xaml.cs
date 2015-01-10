@@ -30,28 +30,35 @@ namespace WidgetImage
 
         private void Button_Musics(object sender, RoutedEventArgs e)
         {
-            mediaAperçus.Stop();
-            string path;
-            path = Environment.GetEnvironmentVariable("USERPROFILE") + "\\Music";
-            Console.WriteLine(path);
-            DirectoryInfo info = new DirectoryInfo(path);
-            if (info.Exists)
+            try
             {
-                List<MyData> list = new List<MyData>();
-                foreach (string str in Directory.GetFiles(path))
+                mediaAperçus.Stop();
+                string path;
+                path = Environment.GetEnvironmentVariable("USERPROFILE") + "\\Music";
+                Console.WriteLine(path);
+                DirectoryInfo info = new DirectoryInfo(path);
+                if (info.Exists)
                 {
-                    if (str.EndsWith(".mp3") || str.EndsWith(".wma"))
+                    List<MyData> list = new List<MyData>();
+                    foreach (string str in Directory.GetFiles(path))
                     {
-                        MyData tmp = new MyData();
-                        tmp.myPath = new Label();
-                        tmp.Data1 = new Label();
-                        tmp.myPath.Content = str;
-                        tmp.myPath.MouseDoubleClick += new MouseButtonEventHandler(Label_Music);
+                        if (str.EndsWith(".mp3") || str.EndsWith(".wma"))
+                        {
+                            MyData tmp = new MyData();
+                            tmp.myPath = new Label();
+                            tmp.Data1 = new Label();
+                            tmp.myPath.Content = str;
+                            tmp.myPath.MouseDoubleClick += new MouseButtonEventHandler(Label_Music);
 
-                        list.Add(tmp);
+                            list.Add(tmp);
+                        }
                     }
+                    myListBox.ItemsSource = list;
                 }
-                myListBox.ItemsSource = list;
+            }
+            catch
+            {
+                return ;
             }
         }
 
@@ -64,33 +71,40 @@ namespace WidgetImage
             }
             catch
             {
-                return;
+                return ;
             }
         }
 
         private void Button_Videos(object sender, RoutedEventArgs e)
         {
-            mediaAperçus.Stop();
-            string path;
-            path = Environment.GetEnvironmentVariable("USERPROFILE") + "\\Videos";
-            Console.WriteLine(path);
-            DirectoryInfo info = new DirectoryInfo(path);
-            if (info.Exists)
+            try
             {
-                List<MyData> list = new List<MyData>();
-                foreach (string str in Directory.GetFiles(path))
+                mediaAperçus.Stop();
+                string path;
+                path = Environment.GetEnvironmentVariable("USERPROFILE") + "\\Videos";
+                Console.WriteLine(path);
+                DirectoryInfo info = new DirectoryInfo(path);
+                if (info.Exists)
                 {
-                    if (str.EndsWith(".mp4") || str.EndsWith(".mkv") || str.EndsWith(".avi"))
+                    List<MyData> list = new List<MyData>();
+                    foreach (string str in Directory.GetFiles(path))
                     {
-                        MyData tmp = new MyData();
-                        tmp.myPath = new Label();
-                        tmp.myPath.Content = str;
-                        tmp.myPath.MouseDoubleClick += new MouseButtonEventHandler(Label_Video);
-                        list.Add(tmp);
+                        if (str.EndsWith(".mp4") || str.EndsWith(".mkv") || str.EndsWith(".avi"))
+                        {
+                            MyData tmp = new MyData();
+                            tmp.myPath = new Label();
+                            tmp.myPath.Content = str;
+                            tmp.myPath.MouseDoubleClick += new MouseButtonEventHandler(Label_Video);
+                            list.Add(tmp);
+                        }
                     }
-                 }
-                
-                myListBox.ItemsSource = list;
+
+                    myListBox.ItemsSource = list;
+                }
+            }
+            catch
+            {
+                return ;
             }
         }
 
@@ -109,36 +123,49 @@ namespace WidgetImage
 
         private void Button_Image(object sender, RoutedEventArgs e)
         {
-            mediaAperçus.Stop();
-            string path;
-            path = Environment.GetEnvironmentVariable("USERPROFILE") + "\\Pictures";
-            Console.WriteLine(path);
-            DirectoryInfo info = new DirectoryInfo(path);
-            if (info.Exists)
+            try
             {
-                List<MyData> list = new List<MyData>();
-
-                foreach (string str in Directory.GetFiles(path))
+                mediaAperçus.Stop();
+                string path;
+                path = Environment.GetEnvironmentVariable("USERPROFILE") + "\\Pictures";
+                Console.WriteLine(path);
+                DirectoryInfo info = new DirectoryInfo(path);
+                if (info.Exists)
                 {
-                    if (str.EndsWith(".png") || str.EndsWith(".bmp")
-                        || str.EndsWith(".jpeg") || str.EndsWith(".jpg"))
+                    List<MyData> list = new List<MyData>();
+
+                    foreach (string str in Directory.GetFiles(path))
                     {
-                        MyData tmp = new MyData();
-                        tmp.myPath = new Label();
-                        tmp.myPath.Content = str;
-                        tmp.myPath.MouseDoubleClick += new MouseButtonEventHandler(Label_Picture);
-                        list.Add(tmp); 
-                   }  
+                        if (str.EndsWith(".png") || str.EndsWith(".bmp")
+                            || str.EndsWith(".jpeg") || str.EndsWith(".jpg"))
+                        {
+                            MyData tmp = new MyData();
+                            tmp.myPath = new Label();
+                            tmp.myPath.Content = str;
+                            tmp.myPath.MouseDoubleClick += new MouseButtonEventHandler(Label_Picture);
+                            list.Add(tmp);
+                        }
+                    }
+                    myListBox.ItemsSource = list;
                 }
-                myListBox.ItemsSource = list;
+            }
+            catch
+            {
+
             }
         }
 
         private void Label_Picture(object sender, MouseButtonEventArgs e)
         {
-            mediaAperçus.Source = new Uri(((Label)sender).Content.ToString());
-            mediaAperçus.Play();
-            Console.WriteLine("sender myPath content = " + ((Label)sender).Content.ToString());
+            try
+            {
+                mediaAperçus.Source = new Uri(((Label)sender).Content.ToString());
+                mediaAperçus.Play();
+            }
+            catch
+            {
+                return ;
+            }
         }
 
         private void loadMediaPlayer(object sender, System.Windows.RoutedEventArgs e)
