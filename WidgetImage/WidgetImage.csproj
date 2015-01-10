@@ -119,13 +119,15 @@
   <ItemGroup>
     <Resource Include="Charlie.ico" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Ressource\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Resource Include="Ressources\Charlie.ico" />
     <Resource Include="Ressources\Charlie.jpg" />
     <Resource Include="Ressources\Play.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Ressources\note.jpg" />
+    <Resource Include="Ressources\Pellicule.jpg" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Ressources\Previous.png" />
