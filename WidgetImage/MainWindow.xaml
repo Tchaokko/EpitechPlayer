@@ -2,13 +2,21 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d"  x:Class="WidgetImage.MainWindow"
-        Title="MainWindow" Height="404" Width="864">
-    <Grid>
+        Title="My Windows Media Player" Height="404" Width="864">
+    <Grid x:Name="appBackground" Background="#FF696969">
 
-        <Menu Name="mainMenu" IsMainMenu="true" HorizontalAlignment="Left" Height="20" VerticalAlignment="Top" Width="135">
+        <Menu Name="mainMenu" IsMainMenu="true" HorizontalAlignment="Left" Height="20" VerticalAlignment="Top" Width="252">
             <MenuItem Header="MediaPlayer" Click="loadMediaPlayer"/>
-                <MenuItem Header="Library" Click="loadLibrary" />
+            <MenuItem Header="Library" Click="loadLibrary" />
+            <MenuItem Header="Themes">
+                <MenuItem Header="Normal Theme" Click="loadTheme" />
+                <MenuItem Header="Blue Theme" Click="loadTheme" />
+                <MenuItem Header="Violet Theme" Click="loadTheme" />
+            </MenuItem>
+            <MenuItem Header="Solidarity" Click="loadCharlie" />
         </Menu>
+
+        <Image x:Name="Charlie" HorizontalAlignment="Left" Height="100" Margin="705,266,0,0" VerticalAlignment="Top" Width="100"/>
 
     </Grid>
 </Window>
