@@ -149,6 +149,10 @@
     <Resource Include="Ressources\pause2.png" />
     <Resource Include="Ressources\Previous2.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Ressources\SpeedDown.png" />
+    <Resource Include="Ressources\SpeedUp.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
