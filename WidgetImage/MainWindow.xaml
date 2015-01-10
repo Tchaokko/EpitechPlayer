@@ -18,5 +18,9 @@
 
         <Image x:Name="Charlie" HorizontalAlignment="Left" Height="100" Margin="705,266,0,0" VerticalAlignment="Top" Width="100"/>
 
+        <ListView x:Name="ListPlaylist" HorizontalAlignment="Left" Height="228" Margin="603,26,0,0" VerticalAlignment="Top" Width="69"/>
+        <Button x:Name="AddBTN" Content="Add PlayList" Click="addPlaylist" HorizontalAlignment="Left" Margin="705,26,0,0" VerticalAlignment="Top" Width="75"/>
+        <Button x:Name="RemoveBTN" Content="Remove PlayList" Click="removePlaylist" HorizontalAlignment="Left" Margin="705,70,0,0" VerticalAlignment="Top" Width="75"/>
+
     </Grid>
 </Window>

@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace WidgetImage
 {  
-    class Playlist
+    public class Playlist
     {
         private List<String> _playlist;
-        String _name;
+        public String _name { get; set; }
 
         public Playlist(int n)
         {            

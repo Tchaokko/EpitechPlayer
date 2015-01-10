@@ -30,6 +30,7 @@ namespace WidgetImage
         private bool dragStarted = false;
         private MainWindow _window;
         public Library    _library {set; get;}
+        public List<Playlist> _playlist { get; set; }
 
         public HandleMediaElement(MainWindow window)
         {

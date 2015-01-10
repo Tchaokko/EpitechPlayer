@@ -22,20 +22,25 @@ namespace WidgetImage
 
     public partial class MainWindow : Window
     {
-        HandleMediaElement _mediaPlayer;
-        Library            _library;
+        private HandleMediaElement _mediaPlayer;
+        private Library            _library;
         private bool _charlie;
-
+        private List<Playlist> _playlist;
+        private List<Button> _listButton;
 
         public MainWindow()
         {
             InitializeComponent();
+            _playlist = new List<Playlist>();
+            _listButton = new List<Button>();
             _mediaPlayer = new HandleMediaElement(this);
             _library = new Library(this);
+            _mediaPlayer._playlist = _playlist;
             _mediaPlayer._library = _library;
+            _library._playlist = _playlist;
             _library._mediaPlayer = _mediaPlayer;
             _charlie = false;
-            Charlie.Source = null;
+            Charlie.Source = null;            
         }
 
         private void loadMediaPlayer(object sender, System.Windows.RoutedEventArgs e)
@@ -69,6 +74,34 @@ namespace WidgetImage
             _charlie = (_charlie ? false : true);
         }
 
+        private void addPlaylist(object sender, System.Windows.RoutedEventArgs e)
+        {
+            Button btn;
+
+            if (_playlist.Count >= 10)
+                return;       
+            btn = new Button();
+            btn.Content = "Playlist " + _playlist.Count();            
+            _listButton.Add(btn);
+            ListPlaylist.ItemsSource = _listButton;
+            ListPlaylist.Items.Refresh();
+            _playlist.Add(new Playlist(_playlist.Count() + 1));     
+        }
+
+        private void removePlaylist(object sender, System.Windows.RoutedEventArgs e)
+        {
+            if (_playlist.Count() <= 0)
+                return;           
+            try {
+                _playlist.RemoveAt(_playlist.Count - 1);
+                _listButton.RemoveAt(_listButton.Count - 1);
+                ListPlaylist.Items.RemoveAt(ListPlaylist.AlternationCount - 1);                
+            }
+            catch { };
+            ListPlaylist.ItemsSource = "";
+            ListPlaylist.ItemsSource = _listButton;
+        }
+
         private void loadTheme(object sender, System.Windows.RoutedEventArgs e)
         {
             MenuItem elem = (MenuItem)sender;
@@ -83,9 +116,9 @@ namespace WidgetImage
                         _mediaPlayer.appBackground.Background = Brushes.DarkViolet;
                         break;
                     case ("Blue Theme"):
-                        appBackground.Background = Brushes.DarkBlue;
-                        _library.appBackground.Background = Brushes.DarkBlue;
-                        _mediaPlayer.appBackground.Background = Brushes.DarkBlue;
+                        appBackground.Background = Brushes.LightSkyBlue;
+                        _library.appBackground.Background = Brushes.LightSkyBlue;
+                        _mediaPlayer.appBackground.Background = Brushes.LightSkyBlue;
                         break;                        
                     default:
                         appBackground.Background = Brushes.DimGray;
