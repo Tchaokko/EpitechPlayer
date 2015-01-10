@@ -69,6 +69,7 @@ namespace WidgetImage
                     buttonPrev.Visibility = Visibility.Collapsed;
                     buttonPlay.Visibility = Visibility.Collapsed;
                     buttonNext.Visibility = Visibility.Collapsed;
+                    buttonPause.Visibility = Visibility.Collapsed;
                     volumeSlider.Visibility = Visibility.Collapsed;
                     timeline.Visibility = Visibility.Collapsed;
                     speedRatio.Visibility = Visibility.Collapsed;
@@ -84,6 +85,7 @@ namespace WidgetImage
                     buttonPrev.Visibility = Visibility.Visible;
                     buttonPlay.Visibility = Visibility.Visible;
                     buttonNext.Visibility = Visibility.Visible;
+                    buttonPause.Visibility = Visibility.Visible;
                     volumeSlider.Visibility = Visibility.Visible;
                     timeline.Visibility = Visibility.Visible;
                     speedRatio.Visibility = Visibility.Visible;
@@ -305,6 +307,11 @@ namespace WidgetImage
         private void timeline_DragStarted(object sender, System.Windows.Controls.Primitives.DragStartedEventArgs e)
         {
             dragStarted = true;
+        }
+
+        private void buttonNext_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+
         }
     }
 }

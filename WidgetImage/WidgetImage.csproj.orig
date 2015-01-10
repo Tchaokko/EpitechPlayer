@@ -126,10 +126,7 @@
     <Resource Include="Ressources\Play.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Ressources\note.jpg" />
-    <Resource Include="Ressources\Pellicule.jpg" />
-  </ItemGroup>
-  <ItemGroup>
+<<<<<<< HEAD
     <Resource Include="Ressources\Previous.png" />
   </ItemGroup>
   <ItemGroup>
@@ -137,6 +134,10 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Ressources\Next.jpg" />
+=======
+    <Resource Include="Ressources\note.jpg" />
+    <Resource Include="Ressources\Pellicule.jpg" />
+>>>>>>> 7fd0f50d36e7400462db2735f2c609e65602cf98
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
