@@ -32,10 +32,9 @@ namespace WidgetImage
         {
             try
             {
-                mediaAperçus.Stop();
+                ImageAperçus.Visibility = System.Windows.Visibility.Hidden;
                 string path;
                 path = Environment.GetEnvironmentVariable("USERPROFILE") + "\\Music";
-                Console.WriteLine(path);
                 DirectoryInfo info = new DirectoryInfo(path);
                 if (info.Exists)
                 {
@@ -48,8 +47,7 @@ namespace WidgetImage
                             tmp.myPath = new Label();
                             tmp.Data1 = new Label();
                             tmp.myPath.Content = str;
-                            tmp.myPath.MouseDoubleClick += new MouseButtonEventHandler(Label_Music);
-
+                            tmp.myPath.MouseDown += new MouseButtonEventHandler(Label_Music);
                             list.Add(tmp);
                         }
                     }
@@ -66,8 +64,8 @@ namespace WidgetImage
         {
             try
             {
-                mediaAperçus.Source = new Uri("../../ressources/note.jpg", UriKind.Relative);
-                mediaAperçus.Play();
+                ImageAperçus.Source = new BitmapImage(new Uri("../../ressources/note.png", UriKind.Relative));
+                ImageAperçus.Visibility = System.Windows.Visibility.Visible;
             }
             catch
             {
@@ -79,10 +77,9 @@ namespace WidgetImage
         {
             try
             {
-                mediaAperçus.Stop();
+                ImageAperçus.Visibility = System.Windows.Visibility.Hidden;
                 string path;
                 path = Environment.GetEnvironmentVariable("USERPROFILE") + "\\Videos";
-                Console.WriteLine(path);
                 DirectoryInfo info = new DirectoryInfo(path);
                 if (info.Exists)
                 {
@@ -94,7 +91,7 @@ namespace WidgetImage
                             MyData tmp = new MyData();
                             tmp.myPath = new Label();
                             tmp.myPath.Content = str;
-                            tmp.myPath.MouseDoubleClick += new MouseButtonEventHandler(Label_Video);
+                            tmp.myPath.MouseDown += new MouseButtonEventHandler(Label_Video);
                             list.Add(tmp);
                         }
                     }
@@ -112,8 +109,8 @@ namespace WidgetImage
         {
             try
             {
-                mediaAperçus.Source = new Uri("../../ressources/Pellicule.jpg", UriKind.Relative);
-                mediaAperçus.Play();
+                ImageAperçus.Source = new BitmapImage(new Uri("../../ressources/Pellicule.png", UriKind.Relative));
+                ImageAperçus.Visibility = System.Windows.Visibility.Visible;
             }
             catch
             {
@@ -125,10 +122,9 @@ namespace WidgetImage
         {
             try
             {
-                mediaAperçus.Stop();
+                ImageAperçus.Visibility = System.Windows.Visibility.Hidden;
                 string path;
                 path = Environment.GetEnvironmentVariable("USERPROFILE") + "\\Pictures";
-                Console.WriteLine(path);
                 DirectoryInfo info = new DirectoryInfo(path);
                 if (info.Exists)
                 {
@@ -142,7 +138,7 @@ namespace WidgetImage
                             MyData tmp = new MyData();
                             tmp.myPath = new Label();
                             tmp.myPath.Content = str;
-                            tmp.myPath.MouseDoubleClick += new MouseButtonEventHandler(Label_Picture);
+                            tmp.myPath.MouseDown += new MouseButtonEventHandler(Label_Picture);
                             list.Add(tmp);
                         }
                     }
@@ -159,8 +155,8 @@ namespace WidgetImage
         {
             try
             {
-                mediaAperçus.Source = new Uri(((Label)sender).Content.ToString());
-                mediaAperçus.Play();
+                ImageAperçus.Source = new BitmapImage(new Uri(((Label)sender).Content.ToString()));
+                ImageAperçus.Visibility = System.Windows.Visibility.Visible;  
             }
             catch
             {
