@@ -29,87 +29,103 @@ namespace WidgetImage
 
         private void Button_Musics(object sender, RoutedEventArgs e)
         {
+            mediaAperçus.Stop();
             string path;
             path = Environment.GetEnvironmentVariable("USERPROFILE") + "\\Music";
             Console.WriteLine(path);
             DirectoryInfo info = new DirectoryInfo(path);
             if (info.Exists)
             {
-                List<Label> list = new List<Label>();
+                List<MyData> list = new List<MyData>();
                 foreach (string str in Directory.GetFiles(path))
                 {
-                    Label tmp = new Label();
-                    tmp.Content = str;
-                    list.Add(tmp);
-            }
-                myTree.ItemsSource = list;
+                    if (str.EndsWith(".mp3") || str.EndsWith(".wma"))
+                    {
+                        MyData tmp = new MyData();
+                        tmp.myPath = new Label();
+                        tmp.Data1 = new Label();
+                        tmp.myPath.Content = str;
+                        tmp.myPath.MouseDoubleClick += new MouseButtonEventHandler(Label_Music);
 
+                        list.Add(tmp);
+                    }
+                }
+                myListBox.ItemsSource = list;
+            }
         }
+
+        private void Label_Music(object sender, MouseButtonEventArgs e)
+        {
+            mediaAperçus.Source = new Uri(@"C:\Users\lebars_r\Pictures\Note.jpg");
+            mediaAperçus.Play();
+            Console.WriteLine("sender myPath content = " + ((Label)sender).Content.ToString());
         }
 
         private void Button_Videos(object sender, RoutedEventArgs e)
         {
+            mediaAperçus.Stop();
             string path;
             path = Environment.GetEnvironmentVariable("USERPROFILE") + "\\Videos";
             Console.WriteLine(path);
             DirectoryInfo info = new DirectoryInfo(path);
             if (info.Exists)
             {
-                List<MediaElement> list = new List<MediaElement>();
+                List<MyData> list = new List<MyData>();
                 foreach (string str in Directory.GetFiles(path))
                 {
-                    MediaElement tmp = new MediaElement();
-                    tmp.Source = new Uri(str);
-                    tmp.LoadedBehavior = MediaState.Manual;
-
-                    if (tmp.NaturalDuration.HasTimeSpan)
+                    if (str.EndsWith(".mp4") || str.EndsWith(".mkv") || str.EndsWith(".avi"))
                     {
-                        TimeSpan interm = tmp.NaturalDuration.TimeSpan;
-                        if (interm.TotalSeconds > 5)
-                        {
-                            var newTime = ((int)interm.TotalSeconds * 5) / 100;
-                            TimeSpan ts = new TimeSpan(0, 0, 0, newTime, 0);
-                            tmp.Position = ts;
-                        }
+                        MyData tmp = new MyData();
+                        tmp.myPath = new Label();
+                        tmp.myPath.Content = str;
+                        tmp.myPath.MouseDoubleClick += new MouseButtonEventHandler(Label_Video);
+                        list.Add(tmp);
                     }
-                    tmp.Height = 100;
-                    tmp.Width = 100;
-                    tmp.Pause();  
-                    //tmp.Content = str;
-                    list.Add(tmp);
                  }
                 
-                myTree.ItemsSource = list;
-
+                myListBox.ItemsSource = list;
             }
+        }
+
+        private void Label_Video(object sender, MouseButtonEventArgs e)
+        {
+            mediaAperçus.Source = new Uri(@"C:\Users\lebars_r\Pictures\Pellicule.jpg");
+            mediaAperçus.Play();
+            Console.WriteLine("sender myPath content = " + ((Label)sender).Content.ToString());
         }
 
         private void Button_Image(object sender, RoutedEventArgs e)
         {
+            mediaAperçus.Stop();
             string path;
             path = Environment.GetEnvironmentVariable("USERPROFILE") + "\\Pictures";
             Console.WriteLine(path);
             DirectoryInfo info = new DirectoryInfo(path);
             if (info.Exists)
             {
-                List<MediaElement> list = new List<MediaElement>();
+                List<MyData> list = new List<MyData>();
+
                 foreach (string str in Directory.GetFiles(path))
                 {
-                    MediaElement tmp = new MediaElement();
-                    tmp.Source = new Uri(str);
-                    if (tmp.Height > 100)
-                        tmp.Height = 100;
-                    if (tmp.Width > 100)
-                        tmp.Width = 100;
-                    list.Add(tmp);
+                    if (str.EndsWith(".png") || str.EndsWith(".bmp")
+                        || str.EndsWith(".jpeg") || str.EndsWith(".jpg"))
+                    {
+                        MyData tmp = new MyData();
+                        tmp.myPath = new Label();
+                        tmp.myPath.Content = str;
+                        tmp.myPath.MouseDoubleClick += new MouseButtonEventHandler(Label_Picture);
+                        list.Add(tmp); 
+                   }  
                 }
-                myTree.ItemsSource = list;
+                myListBox.ItemsSource = list;
             }
         }
 
-        private void MouseDoubleClickMyTree(object sender, MouseButtonEventArgs e)
+        private void Label_Picture(object sender, MouseButtonEventArgs e)
         {
-            Console.WriteLine(myTree.ToString());
+            mediaAperçus.Source = new Uri(((Label)sender).Content.ToString());
+            mediaAperçus.Play();
+            Console.WriteLine("sender myPath content = " + ((Label)sender).Content.ToString());
         }
 
         private void loadMediaPlayer(object sender, System.Windows.RoutedEventArgs e)
@@ -129,5 +145,6 @@ namespace WidgetImage
         {
             mainMenu.Width = this.Width;
         }
+
     }
 }

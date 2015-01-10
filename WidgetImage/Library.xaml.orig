@@ -13,6 +13,7 @@
         </Button>
 <<<<<<< HEAD
         <TreeView x:Name="myTree" HorizontalAlignment="Left" Height="607" Margin="33,75,0,0" VerticalAlignment="Top" Width="258" Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" MouseDoubleClick="MouseDoubleClickMyTree"/>
+        <TreeView x:Name="myTree" HorizontalAlignment="Left" Height="607" Margin="33,75,0,0" VerticalAlignment="Top" Width="706" Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" MouseDoubleClick="MouseDoubleClickMyTree"/>
 =======
         <TreeView x:Name="myTree" HorizontalAlignment="Left" Height="607" Margin="33,75,0,0" VerticalAlignment="Top" Width="706" Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" MouseDoubleClick="MouseDoubleClickMyTree"/>
             <MediaElement Height="100" Margin="0,88,0,-172" VerticalAlignment="Top" Width="100"/>
@@ -35,20 +36,21 @@
             </Button.Effect>
         </Button>
 
-<<<<<<< HEAD
-        <Menu Name="mainMenu" IsMainMenu="true" HorizontalAlignment="Left" Height="20" VerticalAlignment="Top" Width="132">
-            <MenuItem Header="Menu" Click="loadMenu"/>
-            <MenuItem Header="Media Player" Click="loadMediaPlayer"/>            
+        <Menu Name="mainMenu" IsMainMenu="true" HorizontalAlignment="Left" Height="20" VerticalAlignment="Top" Width="1018" Margin="0,0,-0.4,0">
+            <MenuItem Header="_First">
 =======
+        <Frame x:Name="myFrame" Content="" HorizontalAlignment="Left" Height="606" Margin="320,75,0,0" VerticalAlignment="Top" Width="655" Foreground="Black" Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" />
+
+        <Menu Name="mainMenu" IsMainMenu="true" HorizontalAlignment="Left" Height="20" VerticalAlignment="Top" Width="140">
         <Menu Name="mainMenu" IsMainMenu="true" HorizontalAlignment="Left" Height="20" VerticalAlignment="Top" Width="1018" Margin="0,0,-0.4,0">
             <MenuItem Header="_View">
+>>>>>>> 728728f8b9ff3319900ac36b1e339b6c1b5cd7cc
                 <MenuItem Header="Menu" Click="loadMenu" />
                 <MenuItem Header="Media Player" Click="loadMediaPlayer"/>
             </MenuItem>
             <MenuItem Header="_Second">
             </MenuItem>
             <MenuItem Header="_Third"/>
->>>>>>> 9eb2658f90bb826e67d4c2a49974f1fc9822088f
         </Menu>
     </Grid>
 </Window>
