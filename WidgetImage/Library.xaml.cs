@@ -18,9 +18,13 @@ namespace WidgetImage
 {
     public partial class Library : Window
     {
-        public Library()
+        private MainWindow _window;
+        public HandleMediaElement _mediaPlayer { get; set; }
+
+        public Library(MainWindow window)
         {
             InitializeComponent();
+            _window = window;
         }
 
         private void Button_Musics(object sender, RoutedEventArgs e)
@@ -126,19 +130,14 @@ namespace WidgetImage
 
         private void loadMediaPlayer(object sender, System.Windows.RoutedEventArgs e)
         {
-            HandleMediaElement newWindow = new HandleMediaElement();
-
-            newWindow.Show();
-            this.Close();
-
+            _mediaPlayer.Show();
+            this.Hide();
         }
 
         private void loadMenu(object sender, System.Windows.RoutedEventArgs e)
         {
-            MainWindow newWindow = new MainWindow();
-
-            newWindow.Show();
-            this.Close();
+            _window.Show();
+            this.Hide();
 
         }
 
