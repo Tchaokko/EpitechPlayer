@@ -57,9 +57,15 @@ namespace WidgetImage
 
         private void Label_Music(object sender, MouseButtonEventArgs e)
         {
-            mediaAperçus.Source = new Uri(@"C:\Users\lebars_r\Pictures\Note.jpg");
-            mediaAperçus.Play();
-            Console.WriteLine("sender myPath content = " + ((Label)sender).Content.ToString());
+            try
+            {
+                mediaAperçus.Source = new Uri("../../ressources/note.jpg", UriKind.Relative);
+                mediaAperçus.Play();
+            }
+            catch
+            {
+                return;
+            }
         }
 
         private void Button_Videos(object sender, RoutedEventArgs e)
@@ -90,9 +96,15 @@ namespace WidgetImage
 
         private void Label_Video(object sender, MouseButtonEventArgs e)
         {
-            mediaAperçus.Source = new Uri(@"C:\Users\lebars_r\Pictures\Pellicule.jpg");
-            mediaAperçus.Play();
-            Console.WriteLine("sender myPath content = " + ((Label)sender).Content.ToString());
+            try
+            {
+                mediaAperçus.Source = new Uri("../../ressources/Pellicule.jpg", UriKind.Relative);
+                mediaAperçus.Play();
+            }
+            catch
+            {
+                return ;
+            }
         }
 
         private void Button_Image(object sender, RoutedEventArgs e)
