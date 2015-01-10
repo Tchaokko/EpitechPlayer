@@ -265,6 +265,7 @@ namespace WidgetImage
             myMedia.Height = gridMedia.ActualHeight;
             myMedia.Width = (gridMedia.ActualWidth * 90) / 100;
             timeline.Width = (gridControl.ActualWidth * 75) / 100;
+            volumeSlider.Width = (gridControl.ActualWidth * 10) / 100;
 
         }
         // When the media playback is finished. Stop() the media to seek to media start.
