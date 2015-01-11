@@ -30,9 +30,9 @@
                 <DataTemplate>
                     <Grid>
                         <StackPanel Orientation="Horizontal">
-                            <Label Content="{Binding myPath}"/>
-                            <Label Content="{Binding Data1}" Margin="10,0,0,0"/>
-                            <Label Content="{Binding Add}" Margin="10,0,0,0"/> <!--="Left" VerticalAlignment="Top" FontWeight="Bold" Background="#FFE2E2E2" />-->
+                            <Label Content="{Binding myName}"/>
+                            <Label Content="{Binding Data1}"/>
+                            <Label Content="{Binding Add}" Margin="10,0,0,0"/>
                         </StackPanel>
                     </Grid>
                 </DataTemplate>

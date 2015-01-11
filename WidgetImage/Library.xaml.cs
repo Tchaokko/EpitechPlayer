@@ -47,12 +47,15 @@ namespace WidgetImage
                     {
                         if (str.EndsWith(".mp3") || str.EndsWith(".wma"))
                         {
+                            FileInfo _info = new FileInfo(str);
                             MyData tmp = new MyData();
                             tmp.myPath = new Label();
-                            tmp.Data1 = new Label();
+                            tmp.myName = new Label();
+                            tmp.myName.Content = _info.Name;
                             tmp.Add = new Button();
                             tmp.myPath.Content = str;
-                            tmp.myPath.MouseDown += new MouseButtonEventHandler(Label_Music);
+                            tmp.myName.MouseDown += new MouseButtonEventHandler(Label_Music);
+                            tmp.Data1.MouseDown += new MouseButtonEventHandler(Label_Music);
                             tmp.Add.Content = "Add to Playlist";
                             tmp.Add.Click += new RoutedEventHandler(Add_To_Playlist);
                             tmp.Add.FontWeight = System.Windows.FontWeights.Bold;
@@ -103,11 +106,13 @@ namespace WidgetImage
                         if (str.EndsWith(".mp4") || str.EndsWith(".mkv")
                             || str.EndsWith(".avi") || str.EndsWith(".wmv"))
                         {
+                            FileInfo _info = new FileInfo(str);
                             MyData tmp = new MyData();
                             tmp.myPath = new Label();
                             tmp.Add = new Button();
-                            tmp.myPath.Content = str;
-                            tmp.myPath.MouseDown += new MouseButtonEventHandler(Label_Video);
+                            tmp.myName = new Label();
+                            tmp.myName.Content = _info.Name; tmp.myPath.Content = str;
+                            tmp.myName.MouseDown += new MouseButtonEventHandler(Label_Video);
                             tmp.Add.Content = "Add to Playlist";
                             tmp.Add.FontWeight = System.Windows.FontWeights.Bold;
                             tmp.Add.Background = (Brush)converter.ConvertFrom("#FFE2E2E2");
@@ -158,16 +163,20 @@ namespace WidgetImage
                         if (str.EndsWith(".png") || str.EndsWith(".bmp")
                             || str.EndsWith(".jpeg") || str.EndsWith(".jpg"))
                         {
+                            FileInfo _info = new FileInfo(str);
                             MyData tmp = new MyData();
                             tmp.myPath = new Label();
                             tmp.Add = new Button();
                             tmp.Add.Content = "Add to Playlist";
+                            tmp.myName = new Label();
+                            tmp.myName.Content = _info.Name;
                             tmp.Add.Click += new RoutedEventHandler(Add_To_Playlist);
                             tmp.myPath.Content = str;
                             tmp.Add.FontWeight = System.Windows.FontWeights.Bold;
                             tmp.Add.Background = (Brush)converter.ConvertFrom("#FFE2E2E2");
                             tmp.Add.Uid = _uid.ToString();
-                            tmp.myPath.MouseDown += new MouseButtonEventHandler(Label_Picture);
+                            tmp.myName.Uid = _uid.ToString();
+                            tmp.myName.MouseDown += new MouseButtonEventHandler(Label_Picture);
                             tmplist.Add(tmp);
                             _uid += 1;
                         }
@@ -199,7 +208,8 @@ namespace WidgetImage
         {
             try
             {
-                ImageAperçus.Source = new BitmapImage(new Uri(((Label)sender).Content.ToString()));
+                Int16 tmp = Convert.ToInt16(((Label)sender).Uid);
+                ImageAperçus.Source = new BitmapImage(new Uri(list[tmp].myPath.Content.ToString()));
                 ImageAperçus.Visibility = System.Windows.Visibility.Visible;  
             }
             catch
