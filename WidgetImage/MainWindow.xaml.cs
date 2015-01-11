@@ -211,6 +211,13 @@ namespace WidgetImage
         {
             mainMenu.Width = this.Width;
         }
+
+        private void isClosed(object sender, EventArgs e)
+        {
+            _library.Close();
+            _mediaPlayer.Close();
+            this.Close();
+        }
     }
 
 }

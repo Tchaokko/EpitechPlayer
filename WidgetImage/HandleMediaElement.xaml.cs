@@ -421,6 +421,13 @@ namespace WidgetImage
             }
             catch { return; }
         }
+
+        private void isClosed(object sender, EventArgs e)
+        {
+            _library.Close();
+            _window.Close();
+            this.Close();
+        }
     
     }
 }
