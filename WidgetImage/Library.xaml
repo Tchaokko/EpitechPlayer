@@ -25,8 +25,8 @@
             <MenuItem Header="Media Player" Click="loadMediaPlayer"/>
         </Menu>
 
-        <ListView x:Name="myListBox" HorizontalAlignment="Left" Height="552" Margin="33,92,0,0" VerticalAlignment="Top" Width="731" Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}">
-            <ListView.ItemTemplate>
+        <ListBox x:Name="myListBox" HorizontalAlignment="Left" Height="552" Margin="33,92,0,0" VerticalAlignment="Top" Width="731" Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}">
+            <ListBox.ItemTemplate>
                 <DataTemplate>
                     <Grid>
                         <StackPanel Orientation="Horizontal">
@@ -36,8 +36,8 @@
                         </StackPanel>
                     </Grid>
                 </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
+            </ListBox.ItemTemplate>
+        </ListBox>
         <Label Content="Aperçus" HorizontalAlignment="Left" Margin="841,36,0,0" VerticalAlignment="Top" />
         <Image x:Name="ImageAperçus" HorizontalAlignment="Left" Height="176" Margin="797,92,0,0" VerticalAlignment="Top" Width="176"/>
     </Grid>

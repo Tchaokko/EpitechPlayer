@@ -22,7 +22,7 @@
 
         <Image x:Name="Charlie" HorizontalAlignment="Left" Height="100" Margin="730,253,0,0" VerticalAlignment="Top" Width="100"/>
 
-        <ListView x:Name="ListPlaylist" HorizontalAlignment="Left" Height="4" Margin="168,55,0,0" VerticalAlignment="Top" Width="60"/>
+        <ListView x:Name="ListPlaylist" HorizontalAlignment="Left" Height="4" Margin="168,55,0,0" VerticalAlignment="Top" Width="60" Background="{x:Null}" BorderBrush="{x:Null}"/>
         <Button x:Name="AddBTN" Content="Add PlayList" Click="addPlaylist" HorizontalAlignment="Left" Margin="25,55,0,0" VerticalAlignment="Top" Width="100" Background="#FFE2E2E2" FontWeight="Bold" Height="22">
             <Button.Effect>
                 <DropShadowEffect/>
@@ -34,13 +34,13 @@
             </Button.Effect>
         </Button>
         <TextBlock x:Name="Selection" Margin="25,136,656.6,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Height="16"/>
-        <ListView x:Name="ListContent" HorizontalAlignment="Left" Height="298" Margin="258,55,0,0" VerticalAlignment="Top" Width="130">
+        <ListView x:Name="ListContent" HorizontalAlignment="Left" Height="298" Margin="258,55,0,0" VerticalAlignment="Top" Width="492">
             <ListView.View>
                 <GridView>
                     <GridViewColumn/>
                 </GridView>
             </ListView.View>
-        </ListView>        
+        </ListView>
         <Button x:Name="RenameBTN" Content="RenamePlayList" Click="renamePlaylist" HorizontalAlignment="Left" Margin="25,200,0,0" VerticalAlignment="Top" Width="100" Background="#FFE2E2E2" FontWeight="Bold" Height="22">
             <Button.Effect>
                 <DropShadowEffect/>
