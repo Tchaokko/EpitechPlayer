@@ -40,14 +40,14 @@ namespace WidgetImage
             _library._mediaPlayer = _mediaPlayer;
 
             _library._playlist = _playlist;
-            _mediaPlayer._playlist = _playlist;            
-            
-            _library._playlistSelected = -1;
-            _mediaPlayer._playlistSelected = -1;
+            _mediaPlayer._playlist = _playlist;
+
+            _playlistSelected = -1;
+            _library._playlistSelected = _playlistSelected;
+            _mediaPlayer._playlistSelected = _playlistSelected;
             
             _charlie = false;
-            Charlie.Source = null;
-            _playlistSelected = -1;
+            Charlie.Source = null;            
         }
 
         private void loadMediaPlayer(object sender, System.Windows.RoutedEventArgs e)
