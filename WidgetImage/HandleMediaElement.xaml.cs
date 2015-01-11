@@ -31,6 +31,7 @@ namespace WidgetImage
         private MainWindow _window;
         public Library    _library {set; get;}
         public List<Playlist>     _playlist { set; get; }
+        public int _playlistSelected { get; set; }
 
 
         public HandleMediaElement(MainWindow window)

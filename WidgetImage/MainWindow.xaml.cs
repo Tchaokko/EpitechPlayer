@@ -27,6 +27,7 @@ namespace WidgetImage
         private bool _charlie;
         private List<Playlist> _playlist;
         private List<Button> _listButton;
+        private int _playlistSelected;
 
         public MainWindow()
         {
@@ -40,7 +41,8 @@ namespace WidgetImage
             _library._playlist = _playlist;
             _library._mediaPlayer = _mediaPlayer;
             _charlie = false;
-            Charlie.Source = null;            
+            Charlie.Source = null;
+            _playlistSelected = -1;
         }
 
         private void loadMediaPlayer(object sender, System.Windows.RoutedEventArgs e)
@@ -74,6 +76,14 @@ namespace WidgetImage
             _charlie = (_charlie ? false : true);
         }
 
+        private void selectPlaylist(object sender, System.Windows.RoutedEventArgs e)
+        {
+            Button btn = (Button)sender;
+            _playlistSelected = Convert.ToInt16(btn.Uid);
+            _library._playlistSelected = _playlistSelected;
+            Selection.Text = "PlayList" + _playlistSelected;
+        }
+
         private void addPlaylist(object sender, System.Windows.RoutedEventArgs e)
         {
             Button btn;
@@ -81,7 +91,9 @@ namespace WidgetImage
             if (_playlist.Count >= 10)
                 return;       
             btn = new Button();
-            btn.Content = "Playlist " + _playlist.Count();            
+            btn.Content = "Playlist " + _playlist.Count();
+            btn.Uid = ("" + _playlist.Count);
+            btn.Click += new RoutedEventHandler(selectPlaylist);
             _listButton.Add(btn);
             ListPlaylist.ItemsSource = _listButton;
             ListPlaylist.Items.Refresh();
@@ -102,6 +114,11 @@ namespace WidgetImage
             catch { };
             ListPlaylist.ItemsSource = "";
             ListPlaylist.ItemsSource = _listButton;
+            if (_playlistSelected >= _listButton.Count)
+            {
+                _playlistSelected = -1;
+                Selection.Text = "";
+            }
         }
 
         private void loadTheme(object sender, System.Windows.RoutedEventArgs e)
