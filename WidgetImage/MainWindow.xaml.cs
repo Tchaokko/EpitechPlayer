@@ -107,10 +107,10 @@ namespace WidgetImage
             Button btn = (Button)sender;
             _playlistSelected = Convert.ToInt16(btn.Uid);
             _library._playlistSelected = _playlistSelected;
-            Selection.Text = _playlist[_playlistSelected]._name;// +_playlistSelected;
+            Selection.Text = /*_playlist[_playlistSelected]._name;*/ "" + _playlistSelected;
             if (_playlistSelected != -1)
             {
-
+                Console.WriteLine("select : "+ _playlistSelected);
                 Playlist mylist = _playlist.ElementAt(_playlistSelected);                
                 ListContent.ItemsSource = "";
                 ListContent.ItemsSource = mylist._playlist;                
@@ -141,14 +141,35 @@ namespace WidgetImage
         private void removePlaylist(object sender, System.Windows.RoutedEventArgs e)
         {
             if (_playlist.Count() <= 0)
-                return;           
-            try {                
-                ListPlaylist.Height -= 22;
-                _playlist.RemoveAt(_playlist.Count - 1);
-                _listButton.RemoveAt(_listButton.Count - 1);
-                ListPlaylist.Items.RemoveAt(ListPlaylist.AlternationCount - 1);                
+                return;
+            if (_playlistSelected != -1)
+            {
+                try
+                {                   
+                    ListPlaylist.Height -= 22;
+                    _playlist.RemoveAt(_playlistSelected);
+                    _listButton.RemoveAt(_playlistSelected);                    
+                    while (_playlistSelected < _listButton.Count())
+                    {                        
+                        int i = Convert.ToInt16(_listButton[_playlistSelected].Uid) - 1;
+                        _listButton[_playlistSelected].Uid = "" + i;                     
+                        ++_playlistSelected;
+                    }
+                }
+                catch { };
+                _playlistSelected = -1;
+                Selection.Text = "";
             }
-            catch { };
+            else
+            {
+                try
+                {                    
+                    ListPlaylist.Height -= 22;
+                    _playlist.RemoveAt(_playlist.Count - 1);
+                    _listButton.RemoveAt(_listButton.Count - 1);                 
+                }
+                catch { };
+            }
             ListPlaylist.ItemsSource = "";
             ListPlaylist.ItemsSource = _listButton;
             if (_playlistSelected >= _listButton.Count)
