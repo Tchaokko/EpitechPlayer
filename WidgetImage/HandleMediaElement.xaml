@@ -8,7 +8,11 @@
         <Menu x:Name="mainMenu" IsMainMenu="true" HorizontalAlignment="Left" Height="20" VerticalAlignment="Top" Width="161">
             <MenuItem Header="Menu" Click="loadMenu"/>
             <MenuItem Header="Library" Click="loadLibrary" />
-            <MenuItem Header="Load File" Click="loadFile"/>
+            <MenuItem Header="Load File">
+                <MenuItem Header="Load File" Click="loadFile"/>
+                <MenuItem Header="Load Playlist" Click="loadPlaylist"/>
+            </MenuItem>
+
         </Menu>
         <StackPanel x:Name="buttonMedia" Margin="280,341,338,-2" Orientation="Horizontal" RenderTransformOrigin="0.515,0.728">
             <StackPanel.RenderTransform>
