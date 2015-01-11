@@ -21,6 +21,7 @@ namespace WidgetImage
         public MyData() { }
         public MediaElement media { get; set; }
         public Label myPath { get; set; }
+        public Label myName { get; set; }
         public Label Data1 { get; set; }
         public Button Add { get; set; }
     }
