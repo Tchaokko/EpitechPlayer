@@ -305,7 +305,7 @@ namespace WidgetImage
 
         private void buttonNext_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            if (ifPlaylist)
+            if (ifPlaylist && (myPlayList.Count > itePlayList))
             {
                 itePlayList += 1;
                 if (!String.IsNullOrEmpty(myPlayList.ElementAt(itePlayList)))
@@ -320,7 +320,7 @@ namespace WidgetImage
 
         private void buttonPrev_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            if (ifPlaylist && itePlayList > 1)
+            if (ifPlaylist && itePlayList > 0)
             {
                 itePlayList -= 1;
                 if (!String.IsNullOrEmpty(myPlayList.ElementAt(itePlayList)))
@@ -354,15 +354,15 @@ namespace WidgetImage
 
         private void loadPlaylist(object sender, RoutedEventArgs e)
         {
+            Console.WriteLine("loadPlaylist");
             if (_playlistSelected != -1)
             {
-                itePlayList = 1;
-                if (!String.IsNullOrEmpty(myPlayList.ElementAt(itePlayList)))
-                {
-                    ifPlaylist = true;
-                    myPlayList = (_playlist.ElementAt(_playlistSelected))._playlist;
-                    loadTheFile(myPlayList.ElementAt(itePlayList));
-                }
+                Console.WriteLine("loadPlaylist");
+                itePlayList = 0;
+                ifPlaylist = true;
+                myPlayList = (_playlist.ElementAt(_playlistSelected))._playlist;
+                Console.WriteLine(myPlayList.ElementAt(itePlayList));
+                loadTheFile(myPlayList.ElementAt(itePlayList));
             }
         }
 

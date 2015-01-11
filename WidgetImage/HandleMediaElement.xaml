@@ -8,7 +8,7 @@
         <Menu x:Name="mainMenu" IsMainMenu="true" HorizontalAlignment="Left" Height="20" VerticalAlignment="Top" Width="161">
             <MenuItem Header="Menu" Click="loadMenu"/>
             <MenuItem Header="Library" Click="loadLibrary" />
-            <MenuItem Header="Load File">
+            <MenuItem Header="Load">
                 <MenuItem Header="Load File" Click="loadFile"/>
                 <MenuItem Header="Load Playlist" Click="loadPlaylist"/>
             </MenuItem>
