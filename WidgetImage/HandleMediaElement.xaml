@@ -47,8 +47,10 @@
                 <Run Text="0:0:0"/>
             </Label>
             <Label x:Name="currentTime" Content="0:0:0" HorizontalAlignment="Left" Height="26" Width="56" VerticalAlignment="Top" Grid.Row="0"/>
-            <Grid x:Name="gridButton" Grid.RowSpan="2" Grid.Column="3" HorizontalAlignment="Left"   Grid.Row="1" Margin="0,18.8,0,0.4" >
+            <Grid x:Name="gridButton" Grid.ColumnSpan="2" Grid.RowSpan="2" Grid.Column="3" HorizontalAlignment="Left"   Grid.Row="1" Margin="0,18.8,0,0.4" >
                 <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*" />
+                    <ColumnDefinition Width="1*" />
                     <ColumnDefinition Width="1*" />
                     <ColumnDefinition Width="1*" />
                     <ColumnDefinition Width="1*" />
@@ -67,6 +69,8 @@
                 <Image x:Name="buttonNext" Visibility="Visible" Source="ressources\Next2.png" MouseDown="buttonNext_MouseDown"  HorizontalAlignment="Left" VerticalAlignment="Top" Grid.ColumnSpan="1"  Grid.RowSpan="2" Grid.Column="6" Grid.Row="1"/>
                 <Image x:Name="buttonSlower" Visibility="Visible" Source="ressources\SpeedDown.png" MouseDown="buttonSlower_MouseDown" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.ColumnSpan="1"  Grid.RowSpan="2" Grid.Column="1" Grid.Row="1"/>
                 <Image x:Name="buttonFaster" Visibility="Visible" Source="ressources\SpeedUp.png" MouseDown="buttonFaster_MouseDown"  HorizontalAlignment="Left" VerticalAlignment="Top" Grid.ColumnSpan="1"  Grid.RowSpan="2" Grid.Column="7" Grid.Row="1"/>
+                <Image x:Name="muteSound" Visibility="Visible" Source="ressources\SpeedUp.png" MouseDown="muteSound_MouseDown"  HorizontalAlignment="Left" VerticalAlignment="Top" Grid.ColumnSpan="1"  Grid.RowSpan="2" Grid.Column="8" Grid.Row="1"/>
+                <Image x:Name="soundBack" Visibility="Visible" Source="ressources\SpeedUp.png" MouseDown="soundBack_MouseDown" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.ColumnSpan="1"  Grid.RowSpan="2" Grid.Column="9" Grid.Row="1"/>
 
             </Grid>
         </Grid>
