@@ -73,7 +73,6 @@ namespace WidgetImage
                     buttonPause.Visibility = Visibility.Collapsed;
                     volumeSlider.Visibility = Visibility.Collapsed;
                     timeline.Visibility = Visibility.Collapsed;
-                    speedRatio.Visibility = Visibility.Collapsed;
                     mainMenu.Visibility = Visibility.Collapsed;
                     gridControl.Visibility = Visibility.Collapsed;
                 }
@@ -89,7 +88,6 @@ namespace WidgetImage
                     buttonPause.Visibility = Visibility.Visible;
                     volumeSlider.Visibility = Visibility.Visible;
                     timeline.Visibility = Visibility.Visible;
-                    speedRatio.Visibility = Visibility.Visible;
                     mainMenu.Visibility = Visibility.Visible;
                     gridControl.Visibility = Visibility.Visible;
                     newY = (myWindow.ActualHeight * 10) / 100;
@@ -192,10 +190,7 @@ namespace WidgetImage
             //InitializePropertyValues();
         }
 
-        private void buttonPrev_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-
-        }
+ 
 
         private void soundChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
@@ -225,12 +220,6 @@ namespace WidgetImage
             }
         }
 
-        private void speedRatioFunc(object sender, RoutedPropertyChangedEventArgs<double> e)
-        {
-            try { myMedia.SpeedRatio = (double)speedRatio.Value; }
-            catch { return; }
-        }
-
         private void Element_MediaOpened(object sender, EventArgs e)
         {
             timeline.Maximum = myMedia.NaturalDuration.TimeSpan.TotalMilliseconds;
@@ -241,7 +230,7 @@ namespace WidgetImage
             // Set the media's starting Volume and SpeedRatio to the current value of the
             // their respective slider controls.
             myMedia.Volume = (double)volumeSlider.Value;
-            myMedia.SpeedRatio = (double)speedRatio.Value;
+            myMedia.SpeedRatio = (double)1;
             if (myMedia.NaturalDuration.HasTimeSpan)
                 totalTime.Content = myMedia.NaturalDuration.TimeSpan.ToString();
         }
@@ -313,6 +302,35 @@ namespace WidgetImage
         private void buttonNext_MouseDown(object sender, MouseButtonEventArgs e)
         {
 
+        }
+
+        private void buttonPrev_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+
+        }
+
+        private void buttonFaster_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            try {
+                if (myMedia.SpeedRatio.CompareTo(3) != 1)
+                {
+                    Console.WriteLine("check 1");
+                    myMedia.SpeedRatio += (double)1;
+                }
+             }
+            catch { return; }
+        }
+
+        private void buttonSlower_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            try {
+                if (myMedia.SpeedRatio.CompareTo(1) != -1)
+                {
+                    Console.WriteLine("check 2");
+                    myMedia.SpeedRatio -= (double)1; 
+                }
+            }
+            catch { return; }
         }
     }
 }
