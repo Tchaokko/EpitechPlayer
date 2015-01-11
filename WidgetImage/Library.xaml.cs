@@ -100,7 +100,8 @@ namespace WidgetImage
                     Int16 _uid = 0;
                     foreach (string str in Directory.GetFiles(path))
                     {
-                        if (str.EndsWith(".mp4") || str.EndsWith(".mkv") || str.EndsWith(".avi"))
+                        if (str.EndsWith(".mp4") || str.EndsWith(".mkv")
+                            || str.EndsWith(".avi") || str.EndsWith(".wmv"))
                         {
                             MyData tmp = new MyData();
                             tmp.myPath = new Label();
