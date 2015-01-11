@@ -81,12 +81,33 @@ namespace WidgetImage
             _charlie = (_charlie ? false : true);
         }
 
+        private void renamePlaylist(object sender, System.Windows.RoutedEventArgs e)
+        {
+            if (_playlistSelected == -1)
+                return;
+            TextRename.Visibility = Visibility.Visible;
+            ValidRenameBTN.Visibility = Visibility.Visible;
+        }
+        private void validRename(object sender, System.Windows.RoutedEventArgs e)
+        {
+            TextRename.Visibility = Visibility.Hidden;
+            ValidRenameBTN.Visibility = Visibility.Hidden;
+            String str = TextRename.Text;
+            if ((str.Length > 3) && (str.Length < 10))
+            {
+                _playlist[_playlistSelected]._name = str;
+                _listButton[_playlistSelected].Content = str;
+                TextRename.Text = "";
+                Selection.Text = str;
+            }
+        }
+
         private void selectPlaylist(object sender, System.Windows.RoutedEventArgs e)
         {
             Button btn = (Button)sender;
             _playlistSelected = Convert.ToInt16(btn.Uid);
             _library._playlistSelected = _playlistSelected;
-            Selection.Text = "PlayList" + _playlistSelected;
+            Selection.Text = _playlist[_playlistSelected]._name;// +_playlistSelected;
             if (_playlistSelected != -1)
             {
 
