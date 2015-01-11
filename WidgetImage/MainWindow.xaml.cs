@@ -40,14 +40,14 @@ namespace WidgetImage
             _library._mediaPlayer = _mediaPlayer;
 
             _library._playlist = _playlist;
-            _mediaPlayer._playlist = _playlist;            
-            
-            _library._playlistSelected = -1;
-            _mediaPlayer._playlistSelected = -1;
+            _mediaPlayer._playlist = _playlist;
+
+            _playlistSelected = -1;
+            _library._playlistSelected = _playlistSelected;
+            _mediaPlayer._playlistSelected = _playlistSelected;
             
             _charlie = false;
-            Charlie.Source = null;
-            _playlistSelected = -1;
+            Charlie.Source = null;            
         }
 
         private void loadMediaPlayer(object sender, System.Windows.RoutedEventArgs e)
@@ -94,6 +94,8 @@ namespace WidgetImage
                 ListContent.ItemsSource = "";
                 ListContent.ItemsSource = mylist._playlist;                
             }
+            _library._playlistSelected = _playlistSelected;
+            _mediaPlayer._playlistSelected = _playlistSelected;
         }
 
         private void addPlaylist(object sender, System.Windows.RoutedEventArgs e)
@@ -133,6 +135,8 @@ namespace WidgetImage
                 _playlistSelected = -1;
                 Selection.Text = "";
             }
+            _library._playlistSelected = _playlistSelected;
+            _mediaPlayer._playlistSelected = _playlistSelected;
         }
 
         private void loadTheme(object sender, System.Windows.RoutedEventArgs e)
