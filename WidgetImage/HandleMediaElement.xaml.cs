@@ -36,6 +36,7 @@ namespace WidgetImage
         private int itePlayList;
         private bool ifPlaylist;
         private bool autoMove = false;
+        private bool isPLaying = false;
 
         public HandleMediaElement(MainWindow window)
         {
@@ -135,6 +136,7 @@ namespace WidgetImage
             myDispatcher.Interval = new TimeSpan(0, 0, 1);
             myDispatcher.Start();
             myMedia.Source = new Uri(pathFile);
+            isPLaying = true;
             myMedia.Play();
             if (myMedia.NaturalDuration.HasTimeSpan)
                 totalTime.Content = myMedia.NaturalDuration.TimeSpan.ToString();
@@ -152,20 +154,33 @@ namespace WidgetImage
             // The Play method can be used to resume.
             try
             {
-                myMedia.Pause();
+                if (isPLaying)
+                {
+                    myMedia.Pause();
+                    isPLaying = false;
+                }
             }
             catch { return; }
         }
 
         private void playMedia(object sender, RoutedEventArgs e)
         {
-            // The Play method will begin the media if it is not currently active or  
-            // resume media if it is paused. This has no effect if the media is 
-            // already running.
-            myMedia.Play();
-            totalTime.Content = myMedia.NaturalDuration.ToString();
-            // Initialize the MediaElement property values.
-            //InitializePropertyValues();
+            try
+            {
+                if (!isPLaying)
+                {
+                    myMedia.Play();
+                    isPLaying = true;
+                }
+                else
+                {
+                    myMedia.Pause();
+                    isPLaying = false;
+                }
+                 totalTime.Content = myMedia.NaturalDuration.ToString();
+            }
+            catch { return; }
+
         }
 
         private void prevMedia(object sender, RoutedEventArgs e)
@@ -380,6 +395,23 @@ namespace WidgetImage
                         itePlayList = 1;
                         ifPlaylist = false;
                     }
+                }
+            }
+        }
+
+        private void myWindow_KeyDown(object sender, KeyEventArgs e)
+        {
+            if(e.Key == Key.Space)
+            {
+                if (isPLaying)
+                {
+                    isPLaying = false;
+                    myMedia.Pause();
+                }
+                else
+                {
+                    isPLaying = true;
+                    myMedia.Play();
                 }
             }
         }
