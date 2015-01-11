@@ -16,7 +16,7 @@ using System.Windows.Navigation;
 
 namespace WidgetImage
 {
-    class MyData
+    public class MyData
     {
         public MyData() { }
         public MediaElement media { get; set; }

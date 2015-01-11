@@ -25,19 +25,19 @@
             <MenuItem Header="Media Player" Click="loadMediaPlayer"/>
         </Menu>
 
-        <ListBox x:Name="myListBox" HorizontalAlignment="Left" Height="552" Margin="33,92,0,0" VerticalAlignment="Top" Width="731" Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}">
-            <ListBox.ItemTemplate>
+        <ListView x:Name="myListBox" HorizontalAlignment="Left" Height="552" Margin="33,92,0,0" VerticalAlignment="Top" Width="731" Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}">
+            <ListView.ItemTemplate>
                 <DataTemplate>
                     <Grid>
                         <StackPanel Orientation="Horizontal">
                             <Label Content="{Binding myPath}"/>
                             <Label Content="{Binding Data1}" Margin="10,0,0,0"/>
-                            <Button Content="{Binding Add}" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top" FontWeight="Bold" Background="#FFE2E2E2" />
+                            <Label Content="{Binding Add}" Margin="10,0,0,0"/> <!--="Left" VerticalAlignment="Top" FontWeight="Bold" Background="#FFE2E2E2" />-->
                         </StackPanel>
                     </Grid>
                 </DataTemplate>
-            </ListBox.ItemTemplate>
-        </ListBox>
+            </ListView.ItemTemplate>
+        </ListView>
         <Label Content="Aperçus" HorizontalAlignment="Left" Margin="841,36,0,0" VerticalAlignment="Top" />
         <Image x:Name="ImageAperçus" HorizontalAlignment="Left" Height="176" Margin="797,92,0,0" VerticalAlignment="Top" Width="176"/>
     </Grid>

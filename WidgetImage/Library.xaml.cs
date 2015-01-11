@@ -22,6 +22,7 @@ namespace WidgetImage
         public HandleMediaElement _mediaPlayer { get; set; }
         public List<Playlist> _playlist { get; set; }
         public int _playlistSelected { get; set; }
+        public List<MyData> list { get; set; }
 
         public Library(MainWindow window)
         {
@@ -39,7 +40,9 @@ namespace WidgetImage
                 DirectoryInfo info = new DirectoryInfo(path);
                 if (info.Exists)
                 {
-                    List<MyData> list = new List<MyData>();
+                    List<MyData> tmplist = new List<MyData>();
+                    var converter = new BrushConverter();
+                    Int16 _uid = 0;
                     foreach (string str in Directory.GetFiles(path))
                     {
                         if (str.EndsWith(".mp3") || str.EndsWith(".wma"))
@@ -52,9 +55,14 @@ namespace WidgetImage
                             tmp.myPath.MouseDown += new MouseButtonEventHandler(Label_Music);
                             tmp.Add.Content = "Add to Playlist";
                             tmp.Add.Click += new RoutedEventHandler(Add_To_Playlist);
-                            list.Add(tmp);
+                            tmp.Add.FontWeight = System.Windows.FontWeights.Bold;
+                            tmp.Add.Uid = _uid.ToString();
+                            tmp.Add.Background = (Brush)converter.ConvertFrom("#FFE2E2E2");
+                            tmplist.Add(tmp);
+                            _uid += 1;
                         }
                     }
+                    list = tmplist;
                     myListBox.ItemsSource = list;
                 }
             }
@@ -87,7 +95,9 @@ namespace WidgetImage
                 DirectoryInfo info = new DirectoryInfo(path);
                 if (info.Exists)
                 {
-                    List<MyData> list = new List<MyData>();
+                    List<MyData> tmplist = new List<MyData>();
+                    var converter = new BrushConverter();
+                    Int16 _uid = 0;
                     foreach (string str in Directory.GetFiles(path))
                     {
                         if (str.EndsWith(".mp4") || str.EndsWith(".mkv") || str.EndsWith(".avi"))
@@ -98,11 +108,15 @@ namespace WidgetImage
                             tmp.myPath.Content = str;
                             tmp.myPath.MouseDown += new MouseButtonEventHandler(Label_Video);
                             tmp.Add.Content = "Add to Playlist";
+                            tmp.Add.FontWeight = System.Windows.FontWeights.Bold;
+                            tmp.Add.Background = (Brush)converter.ConvertFrom("#FFE2E2E2");
+                            tmp.Add.Uid = _uid.ToString();
                             tmp.Add.Click += new RoutedEventHandler(Add_To_Playlist);
-                            list.Add(tmp);
+                            tmplist.Add(tmp);
+                            _uid += 1;
                         }
                     }
-
+                    list = tmplist;
                     myListBox.ItemsSource = list;
                 }
             }
@@ -135,8 +149,9 @@ namespace WidgetImage
                 DirectoryInfo info = new DirectoryInfo(path);
                 if (info.Exists)
                 {
-                    List<MyData> list = new List<MyData>();
-
+                    List<MyData> tmplist = new List<MyData>();
+                    var converter = new BrushConverter();
+                    Int16 _uid = 0;
                     foreach (string str in Directory.GetFiles(path))
                     {
                         if (str.EndsWith(".png") || str.EndsWith(".bmp")
@@ -148,16 +163,21 @@ namespace WidgetImage
                             tmp.Add.Content = "Add to Playlist";
                             tmp.Add.Click += new RoutedEventHandler(Add_To_Playlist);
                             tmp.myPath.Content = str;
+                            tmp.Add.FontWeight = System.Windows.FontWeights.Bold;
+                            tmp.Add.Background = (Brush)converter.ConvertFrom("#FFE2E2E2");
+                            tmp.Add.Uid = _uid.ToString();
                             tmp.myPath.MouseDown += new MouseButtonEventHandler(Label_Picture);
-                            list.Add(tmp);
+                            tmplist.Add(tmp);
+                            _uid += 1;
                         }
                     }
+                    list = tmplist;
                     myListBox.ItemsSource = list;
                 }
             }
             catch
             {
-
+                return;
             }
         }
 
@@ -165,15 +185,12 @@ namespace WidgetImage
         {
             try
             {
-                Console.WriteLine("toto");
-
-                int toto = Convert.ToInt16(((Button)sender).Uid);
-
-                Console.WriteLine(myListBox.SelectedItems);
+                int tmp = Convert.ToInt16(((Button)sender).Uid);
+    
             }
             catch
             {
-                return ;
+                return;
             }
         }
 
