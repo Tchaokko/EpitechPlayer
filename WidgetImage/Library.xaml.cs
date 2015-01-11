@@ -21,6 +21,7 @@ namespace WidgetImage
         private MainWindow _window;
         public HandleMediaElement _mediaPlayer { get; set; }
         public List<Playlist> _playlist { get; set; }
+        public int _playlistSelected { get; set; }
 
         public Library(MainWindow window)
         {
