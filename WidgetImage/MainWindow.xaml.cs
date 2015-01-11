@@ -107,10 +107,9 @@ namespace WidgetImage
             Button btn = (Button)sender;
             _playlistSelected = Convert.ToInt16(btn.Uid);
             _library._playlistSelected = _playlistSelected;
-            Selection.Text = /*_playlist[_playlistSelected]._name;*/ "" + _playlistSelected;
+            Selection.Text = _playlist[_playlistSelected]._name;
             if (_playlistSelected != -1)
-            {
-                Console.WriteLine("select : "+ _playlistSelected);
+            {                
                 Playlist mylist = _playlist.ElementAt(_playlistSelected);                
                 ListContent.ItemsSource = "";
                 ListContent.ItemsSource = mylist._playlist;                
