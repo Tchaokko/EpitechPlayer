@@ -67,10 +67,10 @@
                 <Image x:Name="buttonPause" Visibility="Visible" Source="ressources\Pause2.png" MouseDown="pauseMedia"  HorizontalAlignment="Left" VerticalAlignment="Top" Grid.ColumnSpan="1"  Grid.Row="2" Grid.Column="4"  Grid.RowSpan="1"/>
                 <Image x:Name="buttonPrev" Visibility="Visible" Source="ressources\Previous2.png" MouseDown="buttonPrev_MouseDown"  HorizontalAlignment="Left" VerticalAlignment="Top" Grid.ColumnSpan="1"  Grid.RowSpan="2" Grid.Column="2" Grid.Row="1"/>
                 <Image x:Name="buttonNext" Visibility="Visible" Source="ressources\Next2.png" MouseDown="buttonNext_MouseDown"  HorizontalAlignment="Left" VerticalAlignment="Top" Grid.ColumnSpan="1"  Grid.RowSpan="2" Grid.Column="6" Grid.Row="1"/>
-                <Image x:Name="buttonSlower" Visibility="Visible" Source="ressources\SpeedDown.png" MouseDown="buttonSlower_MouseDown" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.ColumnSpan="1"  Grid.RowSpan="2" Grid.Column="1" Grid.Row="1"/>
-                <Image x:Name="buttonFaster" Visibility="Visible" Source="ressources\SpeedUp.png" MouseDown="buttonFaster_MouseDown"  HorizontalAlignment="Left" VerticalAlignment="Top" Grid.ColumnSpan="1"  Grid.RowSpan="2" Grid.Column="7" Grid.Row="1"/>
-                <Image x:Name="muteSound" Visibility="Visible" Source="ressources\SpeedUp.png" MouseDown="muteSound_MouseDown"  HorizontalAlignment="Left" VerticalAlignment="Top" Grid.ColumnSpan="1"  Grid.RowSpan="2" Grid.Column="8" Grid.Row="1"/>
-                <Image x:Name="soundBack" Visibility="Visible" Source="ressources\SpeedUp.png" MouseDown="soundBack_MouseDown" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.ColumnSpan="1"  Grid.RowSpan="2" Grid.Column="9" Grid.Row="1"/>
+                <Image x:Name="buttonSlower" Visibility="Visible" Source="ressources\SpeedDown2.png" MouseDown="buttonSlower_MouseDown" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.ColumnSpan="1"  Grid.RowSpan="2" Grid.Column="1" Grid.Row="1"/>
+                <Image x:Name="buttonFaster" Visibility="Visible" Source="ressources\SpeedUp2.png" MouseDown="buttonFaster_MouseDown"  HorizontalAlignment="Left" VerticalAlignment="Top" Grid.ColumnSpan="1"  Grid.RowSpan="2" Grid.Column="7" Grid.Row="1"/>
+                <Image x:Name="muteSound" Visibility="Visible" Source="ressources\Mute.png" MouseDown="muteSound_MouseDown"  HorizontalAlignment="Left" VerticalAlignment="Top" Grid.ColumnSpan="1"  Grid.RowSpan="2" Grid.Column="8" Grid.Row="1"/>
+                <Image x:Name="soundBack" Visibility="Visible" Source="ressources\UnMute.png" MouseDown="soundBack_MouseDown" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.ColumnSpan="1"  Grid.RowSpan="2" Grid.Column="9" Grid.Row="1"/>
 
             </Grid>
         </Grid>

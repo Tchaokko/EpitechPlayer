@@ -159,6 +159,12 @@
   <ItemGroup>
     <Resource Include="Ressources\Pellicule.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Ressources\UnMute.png" />
+    <Resource Include="Ressources\SpeedDown2.png" />
+    <Resource Include="Ressources\SpeedUp2.png" />
+    <Resource Include="Ressources\Mute.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
