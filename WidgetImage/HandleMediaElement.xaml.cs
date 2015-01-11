@@ -35,6 +35,8 @@ namespace WidgetImage
         private List<string> myPlayList;
         private int itePlayList;
         private bool ifPlaylist;
+        private bool autoMove = false;
+        private bool isPLaying = false;
 
         public HandleMediaElement(MainWindow window)
         {
@@ -43,23 +45,6 @@ namespace WidgetImage
             InitializeComponent();
             timeline.Width = (gridControl.ActualWidth * 75) / 100;
             _window = window;
-        }
-
-        private void Element_MediaEnded(object sender, EventArgs e)
-        {
-            if (!ifPlaylist)
-                myMedia.Stop();
-            else
-            {
-                itePlayList += 1;
-                if (!String.IsNullOrEmpty(myPlayList.ElementAt(itePlayList)))
-                    loadTheFile(myPlayList.ElementAt(itePlayList));
-                else
-                { 
-                    itePlayList = 1;
-                    ifPlaylist = false;
-                }
-            }
         }
 
         private void doubleClick(object sender, MouseButtonEventArgs e)
@@ -125,14 +110,15 @@ namespace WidgetImage
             {
                 totalTime.Content = myMedia.NaturalDuration.TimeSpan.ToString();
                 string interm = myMedia.Position.ToString();
-                Console.WriteLine(interm.Length);
                 try
                 {
-                    interm = interm.Substring(0, interm.LastIndexOf(".")); //here need expetion
+                    interm = interm.Substring(0, interm.LastIndexOf("."));
+                    autoMove = true;
+                    timeline.Value = (myMedia.Position.TotalSeconds / myMedia.NaturalDuration.TimeSpan.TotalSeconds) * 100;
+                    autoMove = false;
                 }
                 catch 
                 {
-                    Console.WriteLine("error = ", interm);
                     return; 
                 }
                 currentTime.Content = interm;
@@ -150,6 +136,7 @@ namespace WidgetImage
             myDispatcher.Interval = new TimeSpan(0, 0, 1);
             myDispatcher.Start();
             myMedia.Source = new Uri(pathFile);
+            isPLaying = true;
             myMedia.Play();
             if (myMedia.NaturalDuration.HasTimeSpan)
                 totalTime.Content = myMedia.NaturalDuration.TimeSpan.ToString();
@@ -167,20 +154,33 @@ namespace WidgetImage
             // The Play method can be used to resume.
             try
             {
-                myMedia.Pause();
+                if (isPLaying)
+                {
+                    myMedia.Pause();
+                    isPLaying = false;
+                }
             }
             catch { return; }
         }
 
         private void playMedia(object sender, RoutedEventArgs e)
         {
-            // The Play method will begin the media if it is not currently active or  
-            // resume media if it is paused. This has no effect if the media is 
-            // already running.
-            myMedia.Play();
-            totalTime.Content = myMedia.NaturalDuration.ToString();
-            // Initialize the MediaElement property values.
-            //InitializePropertyValues();
+            try
+            {
+                if (!isPLaying)
+                {
+                    myMedia.Play();
+                    isPLaying = true;
+                }
+                else
+                {
+                    myMedia.Pause();
+                    isPLaying = false;
+                }
+                 totalTime.Content = myMedia.NaturalDuration.ToString();
+            }
+            catch { return; }
+
         }
 
         private void prevMedia(object sender, RoutedEventArgs e)
@@ -198,7 +198,6 @@ namespace WidgetImage
 
         private void soundChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
-            Console.WriteLine((int)volumeSlider.Value);
             try { myMedia.Volume = ((double)volumeSlider.Value / 100); }
             catch { return; }
             
@@ -208,7 +207,7 @@ namespace WidgetImage
         private void moveVideo(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             int SliderValue = (int)timeline.Value;
-            if (!dragStarted)
+            if (!dragStarted && !autoMove)
             {
                 if (myMedia.NaturalDuration.HasTimeSpan)
                 {
@@ -283,7 +282,6 @@ namespace WidgetImage
         private void timeline_DragCompleted(object sender, System.Windows.Controls.Primitives.DragCompletedEventArgs e)
         {
             int SliderValue = (int)timeline.Value;
-            Console.WriteLine("check");
             if (myMedia.NaturalDuration.HasTimeSpan)
             {
                 TimeSpan interm = myMedia.NaturalDuration.TimeSpan;
@@ -305,7 +303,7 @@ namespace WidgetImage
 
         private void buttonNext_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            if (ifPlaylist)
+            if (ifPlaylist && (itePlayList < (myPlayList.Count - 1)))
             {
                 itePlayList += 1;
                 if (!String.IsNullOrEmpty(myPlayList.ElementAt(itePlayList)))
@@ -320,7 +318,7 @@ namespace WidgetImage
 
         private void buttonPrev_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            if (ifPlaylist && itePlayList > 1)
+            if (ifPlaylist && itePlayList > 0)
             {
                 itePlayList -= 1;
                 if (!String.IsNullOrEmpty(myPlayList.ElementAt(itePlayList)))
@@ -333,7 +331,6 @@ namespace WidgetImage
             try {
                 if (myMedia.SpeedRatio.CompareTo(3) != 1)
                 {
-                    Console.WriteLine("check 1");
                     myMedia.SpeedRatio += (double)1;
                 }
              }
@@ -345,7 +342,6 @@ namespace WidgetImage
             try {
                 if (myMedia.SpeedRatio.CompareTo(1) != -1)
                 {
-                    Console.WriteLine("check 2");
                     myMedia.SpeedRatio -= (double)1; 
                 }
             }
@@ -356,13 +352,10 @@ namespace WidgetImage
         {
             if (_playlistSelected != -1)
             {
-                itePlayList = 1;
-                if (!String.IsNullOrEmpty(myPlayList.ElementAt(itePlayList)))
-                {
-                    ifPlaylist = true;
-                    myPlayList = (_playlist.ElementAt(_playlistSelected))._playlist;
-                    loadTheFile(myPlayList.ElementAt(itePlayList));
-                }
+                itePlayList = 0;
+                ifPlaylist = true;
+                myPlayList = (_playlist.ElementAt(_playlistSelected))._playlist;
+                loadTheFile(myPlayList.ElementAt(itePlayList));
             }
         }
 
@@ -381,6 +374,45 @@ namespace WidgetImage
                 pathFile = dlg.FileName;
                 ifPlaylist = false;
                 loadTheFile(pathFile);
+            }
+        }
+
+        private void myMedia_MediaEnded(object sender, RoutedEventArgs e)
+        {
+            if (!ifPlaylist)
+            {
+                myMedia.Stop();
+            }
+            else
+            {
+                if ((itePlayList < (myPlayList.Count - 1)))
+                {
+                    itePlayList += 1;
+                    if (!String.IsNullOrEmpty(myPlayList.ElementAt(itePlayList)))
+                        loadTheFile(myPlayList.ElementAt(itePlayList));
+                    else
+                    {
+                        itePlayList = 1;
+                        ifPlaylist = false;
+                    }
+                }
+            }
+        }
+
+        private void myWindow_KeyDown(object sender, KeyEventArgs e)
+        {
+            if(e.Key == Key.Space)
+            {
+                if (isPLaying)
+                {
+                    isPLaying = false;
+                    myMedia.Pause();
+                }
+                else
+                {
+                    isPLaying = true;
+                    myMedia.Play();
+                }
             }
         }
     

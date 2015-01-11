@@ -90,8 +90,8 @@ namespace WidgetImage
 
         private void Button_Videos(object sender, RoutedEventArgs e)
         {
-            try
-            {
+            //try
+            //{
                 ImageAperçus.Visibility = System.Windows.Visibility.Hidden;
                 string path;
                 path = Environment.GetEnvironmentVariable("USERPROFILE") + "\\Videos";
@@ -125,11 +125,11 @@ namespace WidgetImage
                     list = tmplist;
                     myListBox.ItemsSource = list;
                 }
-            }
-            catch
-            {
-                return ;
-            }
+            //}
+            //catch
+            //{
+            //    return ;
+            //}
         }
 
         private void Label_Video(object sender, MouseButtonEventArgs e)
