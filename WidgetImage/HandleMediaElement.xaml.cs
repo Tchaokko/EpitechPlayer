@@ -105,7 +105,6 @@ namespace WidgetImage
 
         private void dispatcherTimer_Tick(object sender, EventArgs e)
         {
-            // Updating the Label which displays the current second
             if (myMedia.NaturalDuration.HasTimeSpan)
             {
                 totalTime.Content = myMedia.NaturalDuration.TimeSpan.ToString();
@@ -123,7 +122,6 @@ namespace WidgetImage
                 }
                 currentTime.Content = interm;
             }
-            // Forcing the CommandManager to raise the RequerySuggested event
             CommandManager.InvalidateRequerySuggested();
         }
 
@@ -145,13 +143,10 @@ namespace WidgetImage
             myMedia.Margin = new Thickness(newX, 0, 0, 0);
             myMedia.Height = gridMedia.ActualHeight;
             myMedia.Width = (gridMedia.ActualWidth * 90) / 100;
-            //myMedia.Stretch = Stretch.Fill;
         }
 
         private void pauseMedia(object sender, RoutedEventArgs e)
         {
-            // The Pause method pauses the media if it is currently running. 
-            // The Play method can be used to resume.
             try
             {
                 if (isPLaying)
@@ -182,19 +177,6 @@ namespace WidgetImage
             catch { return; }
 
         }
-
-        private void prevMedia(object sender, RoutedEventArgs e)
-        {
-            // The Play method will begin the media if it is not currently active or  
-            // resume media if it is paused. This has no effect if the media is 
-            // already running.
-            //myMedia.Play();
-
-            // Initialize the MediaElement property values.
-            //InitializePropertyValues();
-        }
-
- 
 
         private void soundChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
@@ -230,8 +212,6 @@ namespace WidgetImage
 
         void InitializePropertyValues()
         {
-            // Set the media's starting Volume and SpeedRatio to the current value of the
-            // their respective slider controls.
             myMedia.Volume = (double)volumeSlider.Value;
             myMedia.SpeedRatio = (double)1;
             if (myMedia.NaturalDuration.HasTimeSpan)
@@ -263,7 +243,6 @@ namespace WidgetImage
             volumeSlider.Width = (gridControl.ActualWidth * 10) / 100;
             mainMenu.Width = this.Width;
         }
-        // When the media playback is finished. Stop() the media to seek to media start.
 
         
         private void loadMenu(object sender, System.Windows.RoutedEventArgs e)
@@ -365,8 +344,6 @@ namespace WidgetImage
 
             Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog();
             dlg.FileName = "Document";
-            // dlg.Filter = "Image files (*.jpg, *.jpeg, *.jpe, *.jfif, *.png) | *.jpg; *.jpeg; *.jpe; *.jfif; *.png";
-
             Nullable<bool> result = dlg.ShowDialog();
 
             if (result == true)
