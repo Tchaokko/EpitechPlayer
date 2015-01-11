@@ -37,6 +37,7 @@ namespace WidgetImage
         private bool ifPlaylist;
         private bool autoMove = false;
         private bool isPLaying = false;
+        private double lastVolume = 50;
 
         public HandleMediaElement(MainWindow window)
         {
@@ -337,8 +338,11 @@ namespace WidgetImage
             {
                 itePlayList = 0;
                 ifPlaylist = true;
-                myPlayList = (_playlist.ElementAt(_playlistSelected))._playlist;
-                loadTheFile(myPlayList.ElementAt(itePlayList));
+                if ((_playlist.ElementAt(_playlistSelected)._playlist).Count > 0)
+                {
+                    myPlayList = (_playlist.ElementAt(_playlistSelected))._playlist;
+                    loadTheFile(myPlayList.ElementAt(itePlayList));
+                }
             }
         }
 
@@ -395,6 +399,27 @@ namespace WidgetImage
                     myMedia.Play();
                 }
             }
+        }
+
+        private void muteSound_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            try 
+            {
+                lastVolume = volumeSlider.Value;
+                myMedia.Volume = 0;
+                volumeSlider.Value = 0;
+            }
+            catch { return; }
+        }
+
+        private void soundBack_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            try
+            {
+                myMedia.Volume = lastVolume;
+                volumeSlider.Value = lastVolume;
+            }
+            catch { return; }
         }
     
     }

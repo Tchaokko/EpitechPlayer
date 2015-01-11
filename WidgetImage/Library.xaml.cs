@@ -55,7 +55,6 @@ namespace WidgetImage
                             tmp.Add = new Button();
                             tmp.myPath.Content = str;
                             tmp.myName.MouseDown += new MouseButtonEventHandler(Label_Music);
-                            tmp.Data1.MouseDown += new MouseButtonEventHandler(Label_Music);
                             tmp.Add.Content = "Add to Playlist";
                             tmp.Add.Click += new RoutedEventHandler(Add_To_Playlist);
                             tmp.Add.FontWeight = System.Windows.FontWeights.Bold;
@@ -90,8 +89,8 @@ namespace WidgetImage
 
         private void Button_Videos(object sender, RoutedEventArgs e)
         {
-            //try
-            //{
+            try
+            {
                 ImageAperçus.Visibility = System.Windows.Visibility.Hidden;
                 string path;
                 path = Environment.GetEnvironmentVariable("USERPROFILE") + "\\Videos";
@@ -103,8 +102,7 @@ namespace WidgetImage
                     Int16 _uid = 0;
                     foreach (string str in Directory.GetFiles(path))
                     {
-                        if (str.EndsWith(".mp4") || str.EndsWith(".mkv")
-                            || str.EndsWith(".avi") || str.EndsWith(".wmv"))
+                        if (str.EndsWith(".mp4") || str.EndsWith(".avi") || str.EndsWith(".wmv"))
                         {
                             FileInfo _info = new FileInfo(str);
                             MyData tmp = new MyData();
@@ -125,11 +123,11 @@ namespace WidgetImage
                     list = tmplist;
                     myListBox.ItemsSource = list;
                 }
-            //}
-            //catch
-            //{
-            //    return ;
-            //}
+            }
+            catch
+            {
+                return;
+            }
         }
 
         private void Label_Video(object sender, MouseButtonEventArgs e)
@@ -161,7 +159,7 @@ namespace WidgetImage
                     foreach (string str in Directory.GetFiles(path))
                     {
                         if (str.EndsWith(".png") || str.EndsWith(".bmp")
-                            || str.EndsWith(".jpeg") || str.EndsWith(".jpg"))
+                            || str.EndsWith(".jpeg") || str.EndsWith(".jpg") || str.EndsWith(".gif"))
                         {
                             FileInfo _info = new FileInfo(str);
                             MyData tmp = new MyData();
