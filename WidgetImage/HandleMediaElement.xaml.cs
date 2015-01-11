@@ -248,6 +248,8 @@ namespace WidgetImage
         private void loadMenu(object sender, System.Windows.RoutedEventArgs e)
         {
             _window.Show();
+            myMedia.Pause();
+            isPLaying = false;
             this.Hide();
 
         }
@@ -255,6 +257,8 @@ namespace WidgetImage
         private void loadLibrary(object sender, System.Windows.RoutedEventArgs e)
         {
             _library.Show();
+            myMedia.Pause();
+            isPLaying = false;
             this.Hide();
         }     
 
