@@ -37,9 +37,14 @@ namespace WidgetImage
             _mediaPlayer = new HandleMediaElement(this);
             _library = new Library(this);           
             _mediaPlayer._library = _library;
-            _library._playlist = _playlist;
-            _mediaPlayer._playlist = _playlist;
             _library._mediaPlayer = _mediaPlayer;
+
+            _library._playlist = _playlist;
+            _mediaPlayer._playlist = _playlist;            
+            
+            _library._playlistSelected = -1;
+            _mediaPlayer._playlistSelected = -1;
+            
             _charlie = false;
             Charlie.Source = null;
             _playlistSelected = -1;
