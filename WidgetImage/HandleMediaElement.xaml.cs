@@ -109,7 +109,6 @@ namespace WidgetImage
             {
                 totalTime.Content = myMedia.NaturalDuration.TimeSpan.ToString();
                 string interm = myMedia.Position.ToString();
-                Console.WriteLine(interm.Length);
                 try
                 {
                     interm = interm.Substring(0, interm.LastIndexOf("."));
@@ -184,7 +183,6 @@ namespace WidgetImage
 
         private void soundChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
-            Console.WriteLine((int)volumeSlider.Value);
             try { myMedia.Volume = ((double)volumeSlider.Value / 100); }
             catch { return; }
             
@@ -269,7 +267,6 @@ namespace WidgetImage
         private void timeline_DragCompleted(object sender, System.Windows.Controls.Primitives.DragCompletedEventArgs e)
         {
             int SliderValue = (int)timeline.Value;
-            Console.WriteLine("check");
             if (myMedia.NaturalDuration.HasTimeSpan)
             {
                 TimeSpan interm = myMedia.NaturalDuration.TimeSpan;
@@ -306,10 +303,8 @@ namespace WidgetImage
 
         private void buttonPrev_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            Console.WriteLine("check previous");
             if (ifPlaylist && itePlayList > 0)
             {
-                Console.WriteLine("check previous 2 ");
                 itePlayList -= 1;
                 if (!String.IsNullOrEmpty(myPlayList.ElementAt(itePlayList)))
                     loadTheFile(myPlayList.ElementAt(itePlayList));
@@ -321,7 +316,6 @@ namespace WidgetImage
             try {
                 if (myMedia.SpeedRatio.CompareTo(3) != 1)
                 {
-                    Console.WriteLine("check 1");
                     myMedia.SpeedRatio += (double)1;
                 }
              }
@@ -333,7 +327,6 @@ namespace WidgetImage
             try {
                 if (myMedia.SpeedRatio.CompareTo(1) != -1)
                 {
-                    Console.WriteLine("check 2");
                     myMedia.SpeedRatio -= (double)1; 
                 }
             }
@@ -342,14 +335,11 @@ namespace WidgetImage
 
         private void loadPlaylist(object sender, RoutedEventArgs e)
         {
-            Console.WriteLine("loadPlaylist");
             if (_playlistSelected != -1)
             {
-                Console.WriteLine("loadPlaylist");
                 itePlayList = 0;
                 ifPlaylist = true;
                 myPlayList = (_playlist.ElementAt(_playlistSelected))._playlist;
-                Console.WriteLine(myPlayList.ElementAt(itePlayList));
                 loadTheFile(myPlayList.ElementAt(itePlayList));
             }
         }
@@ -374,15 +364,12 @@ namespace WidgetImage
 
         private void myMedia_MediaEnded(object sender, RoutedEventArgs e)
         {
-            Console.WriteLine("check if ended 1");
             if (!ifPlaylist)
             {
-                Console.WriteLine("check if ended 1.5");
                 myMedia.Stop();
             }
             else
             {
-                Console.WriteLine("check if ended 2");
                 if ((itePlayList < (myPlayList.Count - 1)))
                 {
                     itePlayList += 1;
