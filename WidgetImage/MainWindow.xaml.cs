@@ -94,6 +94,8 @@ namespace WidgetImage
                 ListContent.ItemsSource = "";
                 ListContent.ItemsSource = mylist._playlist;                
             }
+            _library._playlistSelected = _playlistSelected;
+            _mediaPlayer._playlistSelected = _playlistSelected;
         }
 
         private void addPlaylist(object sender, System.Windows.RoutedEventArgs e)
@@ -133,6 +135,8 @@ namespace WidgetImage
                 _playlistSelected = -1;
                 Selection.Text = "";
             }
+            _library._playlistSelected = _playlistSelected;
+            _mediaPlayer._playlistSelected = _playlistSelected;
         }
 
         private void loadTheme(object sender, System.Windows.RoutedEventArgs e)
