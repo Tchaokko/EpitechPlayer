@@ -35,6 +35,7 @@ namespace WidgetImage
         private List<string> myPlayList;
         private int itePlayList;
         private bool ifPlaylist;
+        private bool autoMove = false;
 
         public HandleMediaElement(MainWindow window)
         {
@@ -43,23 +44,6 @@ namespace WidgetImage
             InitializeComponent();
             timeline.Width = (gridControl.ActualWidth * 75) / 100;
             _window = window;
-        }
-
-        private void Element_MediaEnded(object sender, EventArgs e)
-        {
-            if (!ifPlaylist)
-                myMedia.Stop();
-            else
-            {
-                itePlayList += 1;
-                if (!String.IsNullOrEmpty(myPlayList.ElementAt(itePlayList)))
-                    loadTheFile(myPlayList.ElementAt(itePlayList));
-                else
-                { 
-                    itePlayList = 1;
-                    ifPlaylist = false;
-                }
-            }
         }
 
         private void doubleClick(object sender, MouseButtonEventArgs e)
@@ -128,11 +112,13 @@ namespace WidgetImage
                 Console.WriteLine(interm.Length);
                 try
                 {
-                    interm = interm.Substring(0, interm.LastIndexOf(".")); //here need expetion
+                    interm = interm.Substring(0, interm.LastIndexOf("."));
+                    autoMove = true;
+                    timeline.Value = (myMedia.Position.TotalSeconds / myMedia.NaturalDuration.TimeSpan.TotalSeconds) * 100;
+                    autoMove = false;
                 }
                 catch 
                 {
-                    Console.WriteLine("error = ", interm);
                     return; 
                 }
                 currentTime.Content = interm;
@@ -208,7 +194,7 @@ namespace WidgetImage
         private void moveVideo(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             int SliderValue = (int)timeline.Value;
-            if (!dragStarted)
+            if (!dragStarted && !autoMove)
             {
                 if (myMedia.NaturalDuration.HasTimeSpan)
                 {
@@ -305,7 +291,7 @@ namespace WidgetImage
 
         private void buttonNext_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            if (ifPlaylist)
+            if (ifPlaylist && (itePlayList < (myPlayList.Count - 1)))
             {
                 itePlayList += 1;
                 if (!String.IsNullOrEmpty(myPlayList.ElementAt(itePlayList)))
@@ -320,8 +306,10 @@ namespace WidgetImage
 
         private void buttonPrev_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            if (ifPlaylist && itePlayList > 1)
+            Console.WriteLine("check previous");
+            if (ifPlaylist && itePlayList > 0)
             {
+                Console.WriteLine("check previous 2 ");
                 itePlayList -= 1;
                 if (!String.IsNullOrEmpty(myPlayList.ElementAt(itePlayList)))
                     loadTheFile(myPlayList.ElementAt(itePlayList));
@@ -354,15 +342,15 @@ namespace WidgetImage
 
         private void loadPlaylist(object sender, RoutedEventArgs e)
         {
+            Console.WriteLine("loadPlaylist");
             if (_playlistSelected != -1)
             {
-                itePlayList = 1;
-                if (!String.IsNullOrEmpty(myPlayList.ElementAt(itePlayList)))
-                {
-                    ifPlaylist = true;
-                    myPlayList = (_playlist.ElementAt(_playlistSelected))._playlist;
-                    loadTheFile(myPlayList.ElementAt(itePlayList));
-                }
+                Console.WriteLine("loadPlaylist");
+                itePlayList = 0;
+                ifPlaylist = true;
+                myPlayList = (_playlist.ElementAt(_playlistSelected))._playlist;
+                Console.WriteLine(myPlayList.ElementAt(itePlayList));
+                loadTheFile(myPlayList.ElementAt(itePlayList));
             }
         }
 
@@ -381,6 +369,31 @@ namespace WidgetImage
                 pathFile = dlg.FileName;
                 ifPlaylist = false;
                 loadTheFile(pathFile);
+            }
+        }
+
+        private void myMedia_MediaEnded(object sender, RoutedEventArgs e)
+        {
+            Console.WriteLine("check if ended 1");
+            if (!ifPlaylist)
+            {
+                Console.WriteLine("check if ended 1.5");
+                myMedia.Stop();
+            }
+            else
+            {
+                Console.WriteLine("check if ended 2");
+                if ((itePlayList < (myPlayList.Count - 1)))
+                {
+                    itePlayList += 1;
+                    if (!String.IsNullOrEmpty(myPlayList.ElementAt(itePlayList)))
+                        loadTheFile(myPlayList.ElementAt(itePlayList));
+                    else
+                    {
+                        itePlayList = 1;
+                        ifPlaylist = false;
+                    }
+                }
             }
         }
     
