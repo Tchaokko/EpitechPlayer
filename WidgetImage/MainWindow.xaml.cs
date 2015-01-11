@@ -35,11 +35,16 @@ namespace WidgetImage
             _playlist = new List<Playlist>();
             _listButton = new List<Button>();
             _mediaPlayer = new HandleMediaElement(this);
-            _library = new Library(this);
-            _mediaPlayer._playlist = _playlist;
+            _library = new Library(this);           
             _mediaPlayer._library = _library;
-            _library._playlist = _playlist;
             _library._mediaPlayer = _mediaPlayer;
+
+            _library._playlist = _playlist;
+            _mediaPlayer._playlist = _playlist;            
+            
+            _library._playlistSelected = -1;
+            _mediaPlayer._playlistSelected = -1;
+            
             _charlie = false;
             Charlie.Source = null;
             _playlistSelected = -1;
@@ -106,6 +111,8 @@ namespace WidgetImage
             ListPlaylist.Items.Refresh();
             _playlist.Add(new Playlist(_playlist.Count() + 1));            
             ListPlaylist.Height += 22;
+            _library._playlist = _playlist;
+            _mediaPlayer._playlist = _playlist;
         }
 
         private void removePlaylist(object sender, System.Windows.RoutedEventArgs e)
