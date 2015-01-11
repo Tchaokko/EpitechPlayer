@@ -32,7 +32,9 @@ namespace WidgetImage
         public Library    _library {set; get;}
         public List<Playlist>     _playlist { set; get; }
         public int _playlistSelected { get; set; }
-
+        private List<string> myPlayList;
+        private int itePlayList;
+        private bool ifPlaylist;
 
         public HandleMediaElement(MainWindow window)
         {
@@ -45,7 +47,19 @@ namespace WidgetImage
 
         private void Element_MediaEnded(object sender, EventArgs e)
         {
-            myMedia.Stop();
+            if (!ifPlaylist)
+                myMedia.Stop();
+            else
+            {
+                itePlayList += 1;
+                if (!String.IsNullOrEmpty(myPlayList.ElementAt(itePlayList)))
+                    loadTheFile(myPlayList.ElementAt(itePlayList));
+                else
+                { 
+                    itePlayList = 1;
+                    ifPlaylist = false;
+                }
+            }
         }
 
         private void doubleClick(object sender, MouseButtonEventArgs e)
@@ -127,34 +141,24 @@ namespace WidgetImage
             CommandManager.InvalidateRequerySuggested();
         }
 
-        private void loadFile(object sender, RoutedEventArgs e)
+
+
+        private void loadTheFile(string pathFile)
         {
-            String pathFile = "";
-
-            Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog();
-            dlg.FileName = "Document";
-            // dlg.Filter = "Image files (*.jpg, *.jpeg, *.jpe, *.jfif, *.png) | *.jpg; *.jpeg; *.jpe; *.jfif; *.png";
-
-            Nullable<bool> result = dlg.ShowDialog();
-
-            if (result == true)
-            {
-                myDispatcher = new System.Windows.Threading.DispatcherTimer();
-                myDispatcher.Tick += new EventHandler(dispatcherTimer_Tick);
-                myDispatcher.Interval = new TimeSpan(0, 0, 1);
-                myDispatcher.Start();
-                pathFile = dlg.FileName;
-                myMedia.Source = new Uri(pathFile);
-                myMedia.Play();
-                if (myMedia.NaturalDuration.HasTimeSpan)
-                    totalTime.Content = myMedia.NaturalDuration.TimeSpan.ToString();
-                InitializePropertyValues();
-                var newX = (gridMedia.ActualWidth * 5) / 100;
-                myMedia.Margin = new Thickness(newX, 0, 0, 0);
-                myMedia.Height = gridMedia.ActualHeight;
-                myMedia.Width = (gridMedia.ActualWidth * 90) / 100;
-                //myMedia.Stretch = Stretch.Fill;
-            }
+            myDispatcher = new System.Windows.Threading.DispatcherTimer();
+            myDispatcher.Tick += new EventHandler(dispatcherTimer_Tick);
+            myDispatcher.Interval = new TimeSpan(0, 0, 1);
+            myDispatcher.Start();
+            myMedia.Source = new Uri(pathFile);
+            myMedia.Play();
+            if (myMedia.NaturalDuration.HasTimeSpan)
+                totalTime.Content = myMedia.NaturalDuration.TimeSpan.ToString();
+            InitializePropertyValues();
+            var newX = (gridMedia.ActualWidth * 5) / 100;
+            myMedia.Margin = new Thickness(newX, 0, 0, 0);
+            myMedia.Height = gridMedia.ActualHeight;
+            myMedia.Width = (gridMedia.ActualWidth * 90) / 100;
+            //myMedia.Stretch = Stretch.Fill;
         }
 
         private void pauseMedia(object sender, RoutedEventArgs e)
@@ -301,12 +305,27 @@ namespace WidgetImage
 
         private void buttonNext_MouseDown(object sender, MouseButtonEventArgs e)
         {
-
+            if (ifPlaylist)
+            {
+                itePlayList += 1;
+                if (!String.IsNullOrEmpty(myPlayList.ElementAt(itePlayList)))
+                    loadTheFile(myPlayList.ElementAt(itePlayList));
+                else
+                {
+                    itePlayList = 1;
+                    ifPlaylist = false;
+                }
+            }
         }
 
         private void buttonPrev_MouseDown(object sender, MouseButtonEventArgs e)
         {
-
+            if (ifPlaylist && itePlayList > 1)
+            {
+                itePlayList -= 1;
+                if (!String.IsNullOrEmpty(myPlayList.ElementAt(itePlayList)))
+                    loadTheFile(myPlayList.ElementAt(itePlayList));
+            }
         }
 
         private void buttonFaster_MouseDown(object sender, MouseButtonEventArgs e)
@@ -332,5 +351,38 @@ namespace WidgetImage
             }
             catch { return; }
         }
+
+        private void loadPlaylist(object sender, RoutedEventArgs e)
+        {
+            if (_playlistSelected != -1)
+            {
+                itePlayList = 1;
+                if (!String.IsNullOrEmpty(myPlayList.ElementAt(itePlayList)))
+                {
+                    ifPlaylist = true;
+                    myPlayList = (_playlist.ElementAt(_playlistSelected))._playlist;
+                    loadTheFile(myPlayList.ElementAt(itePlayList));
+                }
+            }
+        }
+
+        private void loadFile(object sender, RoutedEventArgs e)
+        {
+            String pathFile = "";
+
+            Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog();
+            dlg.FileName = "Document";
+            // dlg.Filter = "Image files (*.jpg, *.jpeg, *.jpe, *.jfif, *.png) | *.jpg; *.jpeg; *.jpe; *.jfif; *.png";
+
+            Nullable<bool> result = dlg.ShowDialog();
+
+            if (result == true)
+            {
+                pathFile = dlg.FileName;
+                ifPlaylist = false;
+                loadTheFile(pathFile);
+            }
+        }
+    
     }
 }

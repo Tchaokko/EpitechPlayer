@@ -82,6 +82,13 @@ namespace WidgetImage
             _playlistSelected = Convert.ToInt16(btn.Uid);
             _library._playlistSelected = _playlistSelected;
             Selection.Text = "PlayList" + _playlistSelected;
+            if (_playlistSelected != -1)
+            {
+
+                Playlist mylist = _playlist.ElementAt(_playlistSelected);                
+                ListContent.ItemsSource = "";
+                ListContent.ItemsSource = mylist._playlist;                
+            }
         }
 
         private void addPlaylist(object sender, System.Windows.RoutedEventArgs e)

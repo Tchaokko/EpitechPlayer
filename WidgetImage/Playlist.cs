@@ -8,7 +8,7 @@ namespace WidgetImage
 {  
     public class Playlist
     {
-        private List<String> _playlist;
+        public List<String> _playlist { get; set; }
         public String _name { get; set; }
 
         public Playlist(int n)
