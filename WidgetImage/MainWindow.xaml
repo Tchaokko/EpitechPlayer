@@ -40,7 +40,18 @@
                     <GridViewColumn/>
                 </GridView>
             </ListView.View>
-        </ListView>
+        </ListView>        
+        <Button x:Name="RenameBTN" Content="RenamePlayList" Click="renamePlaylist" HorizontalAlignment="Left" Margin="25,200,0,0" VerticalAlignment="Top" Width="100" Background="#FFE2E2E2" FontWeight="Bold" Height="22">
+            <Button.Effect>
+                <DropShadowEffect/>
+            </Button.Effect>
+        </Button>
+        <TextBox x:Name="TextRename" HorizontalAlignment="Left" Height="23" Margin="25,238,0,0" TextWrapping="Wrap" Text="" Visibility="Hidden" VerticalAlignment="Top" Width="120"/>
+        <Button x:Name="ValidRenameBTN" Content="Ok" Click="validRename" HorizontalAlignment="Left" Margin="25,266,0,0" Visibility="Hidden" VerticalAlignment="Top" Width="26" Background="#FFE2E2E2" FontWeight="Bold" Height="22">
+            <Button.Effect>
+                <DropShadowEffect/>
+            </Button.Effect>
+        </Button>
 
     </Grid>
 </Window>

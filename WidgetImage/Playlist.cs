@@ -13,7 +13,7 @@ namespace WidgetImage
 
         public Playlist(int n)
         {            
-            _name += "PlayList " + n;
+            _name += "PlayList " + (n - 1);
             _playlist = new List<String>();
         }
 
