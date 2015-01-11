@@ -76,7 +76,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="DataImage.cs" />
+    <Compile Include="myData.cs" />
     <Compile Include="Playlist.cs" />
     <Compile Include="HandleMediaElement.xaml.cs">
       <DependentUpon>HandleMediaElement.xaml</DependentUpon>

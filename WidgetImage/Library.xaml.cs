@@ -46,8 +46,11 @@ namespace WidgetImage
                             MyData tmp = new MyData();
                             tmp.myPath = new Label();
                             tmp.Data1 = new Label();
+                            tmp.Add = new Button();
                             tmp.myPath.Content = str;
                             tmp.myPath.MouseDown += new MouseButtonEventHandler(Label_Music);
+                            tmp.Add.Content = "Add to Playlist";
+                            tmp.Add.Click += new RoutedEventHandler(Add_To_Playlist);
                             list.Add(tmp);
                         }
                     }
@@ -90,8 +93,11 @@ namespace WidgetImage
                         {
                             MyData tmp = new MyData();
                             tmp.myPath = new Label();
+                            tmp.Add = new Button();
                             tmp.myPath.Content = str;
                             tmp.myPath.MouseDown += new MouseButtonEventHandler(Label_Video);
+                            tmp.Add.Content = "Add to Playlist";
+                            tmp.Add.Click += new RoutedEventHandler(Add_To_Playlist);
                             list.Add(tmp);
                         }
                     }
@@ -137,6 +143,9 @@ namespace WidgetImage
                         {
                             MyData tmp = new MyData();
                             tmp.myPath = new Label();
+                            tmp.Add = new Button();
+                            tmp.Add.Content = "Add to Playlist";
+                            tmp.Add.Click += new RoutedEventHandler(Add_To_Playlist);
                             tmp.myPath.Content = str;
                             tmp.myPath.MouseDown += new MouseButtonEventHandler(Label_Picture);
                             list.Add(tmp);
@@ -148,6 +157,22 @@ namespace WidgetImage
             catch
             {
 
+            }
+        }
+
+        private void Add_To_Playlist(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                Console.WriteLine("toto");
+
+                int toto = Convert.ToInt16(((Button)sender).Uid);
+
+                Console.WriteLine(myListBox.SelectedItems);
+            }
+            catch
+            {
+                return ;
             }
         }
 
