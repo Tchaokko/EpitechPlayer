@@ -186,7 +186,7 @@ namespace WidgetImage
             try
             {
                 int tmp = Convert.ToInt16(((Button)sender).Uid);
-    
+                _playlist[_playlistSelected]._playlist.Add(list[tmp].myPath.Content.ToString());
             }
             catch
             {
