@@ -5,8 +5,8 @@
         Title="My Windows Media Player" Height="404" Width="864" SizeChanged="Window_SizeChanged">
     <Grid x:Name="appBackground" Background="#FF696969">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="683*"/>
-            <ColumnDefinition Width="175*"/>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="0*"/>
         </Grid.ColumnDefinitions>
 
         <Menu Name="mainMenu" IsMainMenu="true" HorizontalAlignment="Left" Height="20" VerticalAlignment="Top" Width="252">
@@ -20,20 +20,27 @@
             <MenuItem Header="Solidarity" Click="loadCharlie" />
         </Menu>
 
-        <Image x:Name="Charlie" HorizontalAlignment="Left" Height="100" Margin="21.931,266,0,0" VerticalAlignment="Top" Width="100" Grid.Column="1"/>
+        <Image x:Name="Charlie" HorizontalAlignment="Left" Height="100" Margin="730,253,0,0" VerticalAlignment="Top" Width="100"/>
 
         <ListView x:Name="ListPlaylist" HorizontalAlignment="Left" Height="4" Margin="168,55,0,0" VerticalAlignment="Top" Width="60"/>
-        <Button x:Name="AddBTN" Content="Add PlayList" Click="addPlaylist" HorizontalAlignment="Left" Margin="25,55,0,0" VerticalAlignment="Top" Width="100" Background="#FFE2E2E2" FontWeight="Bold">
+        <Button x:Name="AddBTN" Content="Add PlayList" Click="addPlaylist" HorizontalAlignment="Left" Margin="25,55,0,0" VerticalAlignment="Top" Width="100" Background="#FFE2E2E2" FontWeight="Bold" Height="22">
             <Button.Effect>
                 <DropShadowEffect/>
             </Button.Effect>
         </Button>
-        <Button x:Name="RemoveBTN" Content="Remove PlayList" Click="removePlaylist" HorizontalAlignment="Left" Margin="25,94,0,0" VerticalAlignment="Top" Width="100" Background="#FFE2E2E2" FontWeight="Bold">
+        <Button x:Name="RemoveBTN" Content="Remove PlayList" Click="removePlaylist" HorizontalAlignment="Left" Margin="25,94,0,0" VerticalAlignment="Top" Width="100" Background="#FFE2E2E2" FontWeight="Bold" Height="22">
             <Button.Effect>
                 <DropShadowEffect/>
             </Button.Effect>
         </Button>
-        <TextBlock x:Name="Selection" HorizontalAlignment="Left" Margin="25,136,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top"/>
+        <TextBlock x:Name="Selection" Margin="25,136,656.6,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Height="16"/>
+        <ListView x:Name="ListContent" HorizontalAlignment="Left" Height="298" Margin="258,55,0,0" VerticalAlignment="Top" Width="130">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn/>
+                </GridView>
+            </ListView.View>
+        </ListView>
 
     </Grid>
 </Window>
